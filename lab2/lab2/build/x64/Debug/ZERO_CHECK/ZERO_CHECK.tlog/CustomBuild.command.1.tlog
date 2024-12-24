@@ -1,0 +1,10 @@
+^C:\GRAPHICS\LAB2\BUILD\CMAKEFILES\A3528206278D671925CB995C11579FDA\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/graphics/lab2 -BC:/graphics/lab2/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/graphics/lab2/build/lab2.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
