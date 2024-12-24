@@ -1,0 +1,15 @@
+/home/sinead/Graphics/lab1/build/CMakeFiles/lab1_window.dir
+/home/sinead/Graphics/lab1/build/CMakeFiles/lab1_triangle.dir
+/home/sinead/Graphics/lab1/build/CMakeFiles/lab1_cube.dir
+/home/sinead/Graphics/lab1/build/CMakeFiles/edit_cache.dir
+/home/sinead/Graphics/lab1/build/CMakeFiles/rebuild_cache.dir
+/home/sinead/Graphics/lab1/build/external/CMakeFiles/edit_cache.dir
+/home/sinead/Graphics/lab1/build/external/CMakeFiles/rebuild_cache.dir
+/home/sinead/Graphics/lab1/build/external/glad-3.3/CMakeFiles/glad.dir
+/home/sinead/Graphics/lab1/build/external/glad-3.3/CMakeFiles/edit_cache.dir
+/home/sinead/Graphics/lab1/build/external/glad-3.3/CMakeFiles/rebuild_cache.dir
+/home/sinead/Graphics/lab1/build/external/glfw-3.1.2/CMakeFiles/edit_cache.dir
+/home/sinead/Graphics/lab1/build/external/glfw-3.1.2/CMakeFiles/rebuild_cache.dir
+/home/sinead/Graphics/lab1/build/external/glfw-3.1.2/src/CMakeFiles/glfw.dir
+/home/sinead/Graphics/lab1/build/external/glfw-3.1.2/src/CMakeFiles/edit_cache.dir
+/home/sinead/Graphics/lab1/build/external/glfw-3.1.2/src/CMakeFiles/rebuild_cache.dir

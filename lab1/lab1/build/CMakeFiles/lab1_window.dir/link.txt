@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/lab1_window.dir/lab1/lab1_window.cpp.o -o lab1_window  -Wl,-rpath,/home/sinead/Graphics/lab1/build -lGL -lGLU libglfw.so.3.1 -Wl,-Bstatic -lrt -Wl,-Bdynamic -lm -lX11 -lXrandr -lXinerama -lXi -lXcursor -lGL -ldl 

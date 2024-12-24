@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="glad"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;CMake Files\external\;CMake Files\external\glfw-3.1.2\;CMake Files\external\glfw-3.1.2\src\;CMake Files\external\glad-3.3\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/graphics/lab1/cmake-build-debug/external/glad-3.3"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="glad">
+				<Option output="C:/graphics/lab1/cmake-build-debug/glad.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/graphics/lab1/cmake-build-debug/external/glad-3.3"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/graphics/lab1/external/glad-3.3/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.34.31933\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\VS\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 glad"/>
+					<CompileFile command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="glad/fast">
+				<Option output="C:/graphics/lab1/cmake-build-debug/glad.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/graphics/lab1/cmake-build-debug/external/glad-3.3"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/graphics/lab1/external/glad-3.3/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.34.31933\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\VS\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 glad/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\graphics\lab1\cmake-build-debug\external\glad-3.3\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/graphics/lab1/external/glad-3.3/include/glad/gl.h">
+			<Option target="glad"/>
+		</Unit>
+		<Unit filename="C:/graphics/lab1/external/glad-3.3/src/gl.c">
+			<Option target="glad"/>
+		</Unit>
+		<Unit filename="C:/graphics/lab1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/graphics/lab1/external/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\"/>
+		</Unit>
+		<Unit filename="C:/graphics/lab1/external/glfw-3.1.2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\glfw-3.1.2\"/>
+		</Unit>
+		<Unit filename="C:/graphics/lab1/external/glfw-3.1.2/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\glfw-3.1.2\src\"/>
+		</Unit>
+		<Unit filename="C:/graphics/lab1/external/glfw-3.1.2/src/glfw3.pc.in">
+			<Option virtualFolder="CMake Files\external\glfw-3.1.2\src\"/>
+		</Unit>
+		<Unit filename="C:/graphics/lab1/external/glfw-3.1.2/src/glfw3Config.cmake.in">
+			<Option virtualFolder="CMake Files\external\glfw-3.1.2\src\"/>
+		</Unit>
+		<Unit filename="C:/graphics/lab1/external/glfw-3.1.2/src/glfw_config.h.in">
+			<Option virtualFolder="CMake Files\external\glfw-3.1.2\src\"/>
+		</Unit>
+		<Unit filename="C:/graphics/lab1/external/glad-3.3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\glad-3.3\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
