@@ -7,6 +7,18 @@ set(CMAKE_DEPENDS_GENERATOR "NMake Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
+  "../CMakeLists.txt"
+  "CMakeFiles/3.17.5/CMakeCCompiler.cmake"
+  "CMakeFiles/3.17.5/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.17.5/CMakeRCCompiler.cmake"
+  "CMakeFiles/3.17.5/CMakeSystem.cmake"
+  "../external/CMakeLists.txt"
+  "../external/glad-3.3/CMakeLists.txt"
+  "../external/glfw-3.1.2/CMakeLists.txt"
+  "../external/glfw-3.1.2/src/CMakeLists.txt"
+  "../external/glfw-3.1.2/src/glfw3.pc.in"
+  "../external/glfw-3.1.2/src/glfw3Config.cmake.in"
+  "../external/glfw-3.1.2/src/glfw_config.h.in"
   "C:/Program Files/JetBrains/CLion 2020.3.2/bin/cmake/win/share/cmake-3.17/Modules/BasicConfigVersion-SameMajorVersion.cmake.in"
   "C:/Program Files/JetBrains/CLion 2020.3.2/bin/cmake/win/share/cmake-3.17/Modules/CMakeCCompiler.cmake.in"
   "C:/Program Files/JetBrains/CLion 2020.3.2/bin/cmake/win/share/cmake-3.17/Modules/CMakeCCompilerABI.c"
@@ -106,18 +118,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files/JetBrains/CLion 2020.3.2/bin/cmake/win/share/cmake-3.17/Modules/Platform/WindowsPaths.cmake"
   "C:/Program Files/JetBrains/CLion 2020.3.2/bin/cmake/win/share/cmake-3.17/Modules/ProcessorCount.cmake"
   "C:/Program Files/JetBrains/CLion 2020.3.2/bin/cmake/win/share/cmake-3.17/Modules/WriteBasicConfigVersionFile.cmake"
-  "../CMakeLists.txt"
-  "CMakeFiles/3.17.5/CMakeCCompiler.cmake"
-  "CMakeFiles/3.17.5/CMakeCXXCompiler.cmake"
-  "CMakeFiles/3.17.5/CMakeRCCompiler.cmake"
-  "CMakeFiles/3.17.5/CMakeSystem.cmake"
-  "../external/CMakeLists.txt"
-  "../external/glad-3.3/CMakeLists.txt"
-  "../external/glfw-3.1.2/CMakeLists.txt"
-  "../external/glfw-3.1.2/src/CMakeLists.txt"
-  "../external/glfw-3.1.2/src/glfw3.pc.in"
-  "../external/glfw-3.1.2/src/glfw3Config.cmake.in"
-  "../external/glfw-3.1.2/src/glfw_config.h.in"
   )
 
 # The corresponding makefile is:

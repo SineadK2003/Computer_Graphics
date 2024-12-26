@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/c_Graphics/lab3/new_lab3/lab3/lab3/lab3_cornellbox.cpp" "C:/c_Graphics/lab3/new_lab3/lab3/cmake-build-debug/CMakeFiles/lab3_cornellbox.dir/lab3/lab3_cornellbox.cpp.obj"
-  "C:/c_Graphics/lab3/new_lab3/lab3/lab3/render/shader.cpp" "C:/c_Graphics/lab3/new_lab3/lab3/cmake-build-debug/CMakeFiles/lab3_cornellbox.dir/lab3/render/shader.cpp.obj"
+  "C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/lab3/lab3_cornellbox.cpp" "C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug/CMakeFiles/lab3_cornellbox.dir/lab3/lab3_cornellbox.cpp.obj"
+  "C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/lab3/render/shader.cpp" "C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug/CMakeFiles/lab3_cornellbox.dir/lab3/render/shader.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")
 
@@ -21,8 +21,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "C:/c_Graphics/lab3/new_lab3/lab3/cmake-build-debug/external/glfw-3.1.2/src/CMakeFiles/glfw.dir/DependInfo.cmake"
-  "C:/c_Graphics/lab3/new_lab3/lab3/cmake-build-debug/external/glad-3.3/CMakeFiles/glad.dir/DependInfo.cmake"
+  "C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug/external/glfw-3.1.2/src/CMakeFiles/glfw.dir/DependInfo.cmake"
+  "C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug/external/glad-3.3/CMakeFiles/glad.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

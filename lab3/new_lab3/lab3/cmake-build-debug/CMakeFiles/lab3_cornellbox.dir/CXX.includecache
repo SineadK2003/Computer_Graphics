@@ -738,7 +738,7 @@ glad/gl.h
 string
 -
 
-C:/c_Graphics/lab3/new_lab3/lab3/lab3/lab3_cornellbox.cpp
+C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/lab3/lab3_cornellbox.cpp
 glad/gl.h
 -
 GLFW/glfw3.h
@@ -756,5 +756,25 @@ vector
 iostream
 -
 math.h
+-
+
+C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/lab3/render/shader.cpp
+shader.h
+C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/lab3/render/shader.h
+string
+-
+iostream
+-
+fstream
+-
+sstream
+-
+vector
+-
+
+C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/lab3/render/shader.h
+glad/gl.h
+-
+string
 -
 

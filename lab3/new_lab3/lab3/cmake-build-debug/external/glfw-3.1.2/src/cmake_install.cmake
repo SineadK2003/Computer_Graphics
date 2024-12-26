@@ -1,4 +1,4 @@
-# Install script for directory: C:/c_Graphics/lab3/new_lab3/lab3/external/glfw-3.1.2/src
+# Install script for directory: C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/external/glfw-3.1.2/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

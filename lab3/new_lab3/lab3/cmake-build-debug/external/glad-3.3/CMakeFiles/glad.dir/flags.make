@@ -6,5 +6,5 @@ C_FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /MP
 
 C_DEFINES = 
 
-C_INCLUDES = -IC:\c_Graphics\lab3\new_lab3\lab3\external\glad-3.3\include 
+C_INCLUDES = -IC:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\external\glad-3.3\include 
 

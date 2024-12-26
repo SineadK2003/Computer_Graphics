@@ -1,4 +1,4 @@
-"C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - NMake Makefiles" C:\c_Graphics\lab3\new_lab3\lab3
+"C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - NMake Makefiles" C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3
 -- The C compiler identification is MSVC 19.42.34435.0
 -- The CXX compiler identification is MSVC 19.42.34435.0
 -- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.42.34433/bin/Hostx86/x86/cl.exe
@@ -31,4 +31,4 @@ CMake Deprecation Warning at external/glfw-3.1.2/CMakeLists.txt:8 (cmake_policy)
 -- Using WGL for context creation
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/c_Graphics/lab3/new_lab3/lab3/cmake-build-debug
+-- Build files have been written to: C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug

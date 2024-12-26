@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/c_Graphics/lab3/new_lab3/lab3/external/glad-3.3/src/gl.c" "C:/c_Graphics/lab3/new_lab3/lab3/cmake-build-debug/external/glad-3.3/CMakeFiles/glad.dir/src/gl.c.obj"
+  "C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/external/glad-3.3/src/gl.c" "C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug/external/glad-3.3/CMakeFiles/glad.dir/src/gl.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "MSVC")
 

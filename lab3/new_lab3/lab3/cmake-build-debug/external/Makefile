@@ -52,10 +52,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\c_Graphics\lab3\new_lab3\lab3
+CMAKE_SOURCE_DIR = C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -84,18 +84,18 @@ rebuild_cache\fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\CMakeFiles C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\CMakeFiles\progress.marks
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\CMakeFiles C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\all
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\CMakeFiles 0
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\clean
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
 .PHONY : clean
 
 # The main clean target
@@ -105,23 +105,23 @@ clean\fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\preinstall
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall\fast:
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\preinstall
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
 .PHONY : preinstall\fast
 
 # clear depends
 depend:
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
 .PHONY : depend
 
 # Help Target
@@ -143,8 +143,8 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external
 .PHONY : cmake_check_build_system
 

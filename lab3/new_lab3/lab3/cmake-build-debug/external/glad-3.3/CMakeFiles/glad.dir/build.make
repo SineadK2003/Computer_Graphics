@@ -47,10 +47,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\c_Graphics\lab3\new_lab3\lab3
+CMAKE_SOURCE_DIR = C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include external\glad-3.3\CMakeFiles\glad.dir\depend.make
@@ -63,28 +63,28 @@ include external\glad-3.3\CMakeFiles\glad.dir\flags.make
 
 external\glad-3.3\CMakeFiles\glad.dir\src\gl.c.obj: external\glad-3.3\CMakeFiles\glad.dir\flags.make
 external\glad-3.3\CMakeFiles\glad.dir\src\gl.c.obj: ..\external\glad-3.3\src\gl.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object external/glad-3.3/CMakeFiles/glad.dir/src/gl.c.obj"
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object external/glad-3.3/CMakeFiles/glad.dir/src/gl.c.obj"
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
 	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe @<<
- /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoCMakeFiles\glad.dir\src\gl.c.obj /FdCMakeFiles\glad.dir\glad.pdb /FS -c C:\c_Graphics\lab3\new_lab3\lab3\external\glad-3.3\src\gl.c
+ /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoCMakeFiles\glad.dir\src\gl.c.obj /FdCMakeFiles\glad.dir\glad.pdb /FS -c C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\external\glad-3.3\src\gl.c
 <<
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 
 external\glad-3.3\CMakeFiles\glad.dir\src\gl.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glad.dir/src/gl.c.i"
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
 	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe > CMakeFiles\glad.dir\src\gl.c.i @<<
- /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\c_Graphics\lab3\new_lab3\lab3\external\glad-3.3\src\gl.c
+ /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\external\glad-3.3\src\gl.c
 <<
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 
 external\glad-3.3\CMakeFiles\glad.dir\src\gl.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glad.dir/src/gl.c.s"
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
 	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe @<<
- /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoNUL /FAs /FaCMakeFiles\glad.dir\src\gl.c.s /c C:\c_Graphics\lab3\new_lab3\lab3\external\glad-3.3\src\gl.c
+ /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoNUL /FAs /FaCMakeFiles\glad.dir\src\gl.c.s /c C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\external\glad-3.3\src\gl.c
 <<
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 
 # Object files for target glad
 glad_OBJECTS = \
@@ -96,13 +96,13 @@ glad_EXTERNAL_OBJECTS =
 glad.lib: external\glad-3.3\CMakeFiles\glad.dir\src\gl.c.obj
 glad.lib: external\glad-3.3\CMakeFiles\glad.dir\build.make
 glad.lib: external\glad-3.3\CMakeFiles\glad.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library ..\..\glad.lib"
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library ..\..\glad.lib"
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
 	$(CMAKE_COMMAND) -P CMakeFiles\glad.dir\cmake_clean_target.cmake
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
 	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\link.exe /lib /nologo /machine:X86 /out:..\..\glad.lib @CMakeFiles\glad.dir\objects1.rsp 
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 
 # Rule to build all files generated by this target.
 external\glad-3.3\CMakeFiles\glad.dir\build: glad.lib
@@ -110,12 +110,12 @@ external\glad-3.3\CMakeFiles\glad.dir\build: glad.lib
 .PHONY : external\glad-3.3\CMakeFiles\glad.dir\build
 
 external\glad-3.3\CMakeFiles\glad.dir\clean:
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3
 	$(CMAKE_COMMAND) -P CMakeFiles\glad.dir\cmake_clean.cmake
-	cd C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug
 .PHONY : external\glad-3.3\CMakeFiles\glad.dir\clean
 
 external\glad-3.3\CMakeFiles\glad.dir\depend:
-	$(CMAKE_COMMAND) -E cmake_depends "NMake Makefiles" C:\c_Graphics\lab3\new_lab3\lab3 C:\c_Graphics\lab3\new_lab3\lab3\external\glad-3.3 C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3 C:\c_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3\CMakeFiles\glad.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "NMake Makefiles" C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3 C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\external\glad-3.3 C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3 C:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\cmake-build-debug\external\glad-3.3\CMakeFiles\glad.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : external\glad-3.3\CMakeFiles\glad.dir\depend
 
