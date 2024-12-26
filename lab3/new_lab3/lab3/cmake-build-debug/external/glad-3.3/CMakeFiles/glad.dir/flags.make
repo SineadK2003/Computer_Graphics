@@ -4,7 +4,7 @@
 # compile C with C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.42.34433/bin/Hostx86/x86/cl.exe
 C_FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /MP
 
-C_DEFINES = 
+C_DEFINES = -Dglad_EXPORTS
 
 C_INCLUDES = -IC:\Computer_Graphics_Git\Computer_Graphics\lab3\new_lab3\lab3\external\glad-3.3\include 
 
