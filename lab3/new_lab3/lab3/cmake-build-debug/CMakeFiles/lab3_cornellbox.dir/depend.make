@@ -70,6 +70,10 @@ CMakeFiles\lab3_cornellbox.dir\lab3\lab3_cornellbox.cpp.obj: ..\external\glm-0.9
 CMakeFiles\lab3_cornellbox.dir\lab3\lab3_cornellbox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\constants.inl
 CMakeFiles\lab3_cornellbox.dir\lab3\lab3_cornellbox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\matrix_transform.hpp
 CMakeFiles\lab3_cornellbox.dir\lab3\lab3_cornellbox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\matrix_transform.inl
+CMakeFiles\lab3_cornellbox.dir\lab3\lab3_cornellbox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\quaternion.hpp
+CMakeFiles\lab3_cornellbox.dir\lab3\lab3_cornellbox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\quaternion.inl
+CMakeFiles\lab3_cornellbox.dir\lab3\lab3_cornellbox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\type_ptr.hpp
+CMakeFiles\lab3_cornellbox.dir\lab3\lab3_cornellbox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\type_ptr.inl
 CMakeFiles\lab3_cornellbox.dir\lab3\lab3_cornellbox.cpp.obj: ..\external\glm-0.9.7.1\glm\integer.hpp
 CMakeFiles\lab3_cornellbox.dir\lab3\lab3_cornellbox.cpp.obj: ..\external\glm-0.9.7.1\glm\mat2x2.hpp
 CMakeFiles\lab3_cornellbox.dir\lab3\lab3_cornellbox.cpp.obj: ..\external\glm-0.9.7.1\glm\mat2x3.hpp

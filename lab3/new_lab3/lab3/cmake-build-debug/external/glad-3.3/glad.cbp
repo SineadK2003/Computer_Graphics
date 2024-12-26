@@ -18,10 +18,10 @@
 				</MakeCommands>
 			</Target>
 			<Target title="glad">
-				<Option output="C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug/glad.lib" prefix_auto="0" extension_auto="0"/>
+				<Option output="C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug/glad.dll" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug/external/glad-3.3"/>
 				<Option object_output="./"/>
-				<Option type="2"/>
+				<Option type="3"/>
 				<Option compiler="msvc8"/>
 				<Compiler>
 					<Add directory="C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/external/glad-3.3/include"/>
@@ -41,10 +41,10 @@
 				</MakeCommands>
 			</Target>
 			<Target title="glad/fast">
-				<Option output="C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug/glad.lib" prefix_auto="0" extension_auto="0"/>
+				<Option output="C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug/glad.dll" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/cmake-build-debug/external/glad-3.3"/>
 				<Option object_output="./"/>
-				<Option type="2"/>
+				<Option type="3"/>
 				<Option compiler="msvc8"/>
 				<Compiler>
 					<Add directory="C:/Computer_Graphics_Git/Computer_Graphics/lab3/new_lab3/lab3/external/glad-3.3/include"/>
