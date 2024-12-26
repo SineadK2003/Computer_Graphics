@@ -117,7 +117,7 @@ struct CornellBox {
 	GLfloat normal_buffer_data[60] = {
 
         // Floor
-        0.0, 1.0, 0.0,
+                0.0, 1.0, 0.0,
                 0.0, 1.0, 0.0,
                 0.0, 1.0, 0.0,
                 0.0, 1.0, 0.0,
@@ -197,7 +197,132 @@ struct CornellBox {
 		16, 18, 19,
 	};
 
-	// OpenGL buffers
+    // Cube data
+    GLfloat cube_vertex_buffer_data[60] = {
+            // Define the vertices for a cube
+            130.0f, 165.0f,  65.0f,
+            82.0f, 165.0f, 225.0f,
+            240.0f, 165.0f, 272.0f,
+            290.0f, 165.0f, 114.0f,
+
+            290.0f, 0.0f, 114.0f,
+            290.0f, 165.0f, 114.0f,
+            240.0f, 165.0f, 272.0f,
+            240.0f, 0.0f, 272.0f,
+
+            130.0f, 0.0f,  65.0f,
+            130.0f, 165.0f,  65.0f,
+            290.0f, 165.0f, 114.0f,
+            290.0f, 0.0f, 114.0f,
+
+            82.0f, 0.0f, 225.0f,
+            82.0f, 165.0f, 225.0f,
+            130.0f, 165.0f,  65.0f,
+            130.0f, 0.0f,  65.0f,
+
+            240.0f, 0.0f, 272.0f,
+            240.0f, 165.0f, 272.0f,
+            82.0f, 165.0f, 225.0f,
+            82.0f, 0.0f, 225.0f
+    };
+   /*GLfloat cube_vertex_buffer_data[72] = {
+           // Front face
+           // Front face
+           130.0f, 165.0f, 65.0f,    // 0: Top-left-front
+           290.0f, 165.0f, 65.0f,    // 1: Top-right-front
+           290.0f, 0.0f, 65.0f,      // 2: Bottom-right-front
+           130.0f, 0.0f, 65.0f,      // 3: Bottom-left-front
+
+           // Back face
+           130.0f, 165.0f, 225.0f,   // 4: Top-left-back
+           290.0f, 165.0f, 225.0f,   // 5: Top-right-back
+           290.0f, 0.0f, 225.0f,     // 6: Bottom-right-back
+           130.0f, 0.0f, 225.0f,     // 7: Bottom-left-back
+
+           // Left face
+           130.0f, 165.0f, 65.0f,    // 8: Top-left-front
+           130.0f, 165.0f, 225.0f,   // 9: Top-left-back
+           130.0f, 0.0f, 225.0f,     // 10: Bottom-left-back
+           130.0f, 0.0f, 65.0f,      // 11: Bottom-left-front
+
+           // Right face
+           290.0f, 165.0f, 65.0f,    // 12: Top-right-front
+           290.0f, 165.0f, 225.0f,   // 13: Top-right-back
+           290.0f, 0.0f, 225.0f,     // 14: Bottom-right-back
+           290.0f, 0.0f, 65.0f,      // 15: Bottom-right-front
+
+           // Top face
+           130.0f, 165.0f, 65.0f,    // 16: Top-left-front
+           290.0f, 165.0f, 65.0f,    // 17: Top-right-front
+           290.0f, 165.0f, 225.0f,   // 18: Top-right-back
+           130.0f, 165.0f, 225.0f,   // 19: Top-left-back
+
+           // Bottom face
+           130.0f, 0.0f, 65.0f,      // 20: Bottom-left-front
+           290.0f, 0.0f, 65.0f,      // 21: Bottom-right-front
+           290.0f, 0.0f, 225.0f,     // 22: Bottom-right-back
+           130.0f, 0.0f, 225.0f      // 23: Bottom-left-back
+   };*/
+
+
+
+    GLfloat cube_color_buffer_data[60] = {
+            // Colors for each vertex
+            // Colors for each vertex (all white)
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+    };
+    GLfloat cube_normal_buffer_data[24] = {
+            0.0f, 0.0f, -1.0f, // Front
+            0.0f, 0.0f, 1.0f,  // Back
+            -1.0f, 0.0f, 0.0f, // Left
+            1.0f, 0.0f, 0.0f,  // Right
+            0.0f, 1.0f, 0.0f,  // Top
+            0.0f, -1.0f, 0.0f  // Bottom
+    };
+
+
+    GLuint cube_index_buffer_data[36] = {
+            // Front face
+            0, 1, 2, 2, 3, 0,
+            // Back face
+            4, 5, 6, 6, 7, 4,
+            // Left face
+            8, 9, 10, 10, 11, 8,
+            // Right face
+            12, 13, 14, 14, 15, 12,
+            // Top face
+            16, 17, 18, 18, 19, 16,
+            // Bottom face
+            20, 21, 22, 22, 23, 20
+
+    };
+
+    // OpenGL buffers for the cube
+    GLuint cubeVertexArrayID;
+    GLuint cubeVertexBufferID;
+    GLuint cubeColorBufferID;
+    GLuint cubeIndexBufferID;
+
+    // OpenGL buffers
 	GLuint vertexArrayID;
 	GLuint vertexBufferID;
 	GLuint indexBufferID;
@@ -213,7 +338,7 @@ struct CornellBox {
 
 
 	void initialize() {
-		// Create a vertex array object
+		/*// Create a vertex array object
 		glGenVertexArrays(1, &vertexArrayID);
 		glBindVertexArray(vertexArrayID);
 
@@ -249,68 +374,223 @@ struct CornellBox {
 		lightPositionID = glGetUniformLocation(programID, "lightPosition");
 		lightIntensityID = glGetUniformLocation(programID, "lightIntensity");
         ambientLightID = glGetUniformLocation(programID, "ambientLight"); // Get ambient light uniform location
-	}
+
+        // Create a vertex array object for the cube
+        glGenVertexArrays(1, &cubeVertexArrayID);
+        glBindVertexArray(cubeVertexArrayID);
+
+        // Create a vertex buffer object for the cube's vertices
+        glGenBuffers(1, &cubeVertexBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, cubeVertexBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(cube_vertex_buffer_data), cube_vertex_buffer_data, GL_STATIC_DRAW);
+
+        // Create a color buffer object for the cube's colors
+        glGenBuffers(1, &cubeColorBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, cubeColorBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(cube_color_buffer_data), cube_color_buffer_data, GL_STATIC_DRAW);
+
+        // Create an index buffer object for the cube's indices
+        glGenBuffers(1, &cubeIndexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeIndexBufferID);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_index_buffer_data), cube_index_buffer_data, GL_STATIC_DRAW);
+
+	}*/
+        // Create a vertex array object
+        glGenVertexArrays(1, &vertexArrayID);
+        glBindVertexArray(vertexArrayID);
+
+        // Create a vertex buffer object to store the vertex data
+        glGenBuffers(1, &vertexBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
+
+        // Create a vertex buffer object to store the color data
+        glGenBuffers(1, &colorBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, colorBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(color_buffer_data), color_buffer_data, GL_STATIC_DRAW);
+
+        // Create a vertex buffer object to store the vertex normals
+        glGenBuffers(1, &normalBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, normalBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(normal_buffer_data), normal_buffer_data, GL_STATIC_DRAW);
+
+        // Create an index buffer object to store the index data that defines triangle faces
+        glGenBuffers(1, &indexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_buffer_data), index_buffer_data, GL_STATIC_DRAW);
+
+        // Create and compile our GLSL program from the shaders
+        programID = LoadShadersFromFile("../lab3/box.vert", "../lab3/box.frag");
+        if (programID == 0) {
+            std::cerr << "Failed to load shaders." << std::endl;
+        }
+
+        // Get a handle for our "MVP" uniform
+        mvpMatrixID = glGetUniformLocation(programID, "MVP");
+        lightPositionID = glGetUniformLocation(programID, "lightPosition");
+        lightIntensityID = glGetUniformLocation(programID, "lightIntensity");
+        ambientLightID = glGetUniformLocation(programID, "ambientLight"); // Get ambient light uniform location
+
+        // Create a vertex array object for the cube
+        glGenVertexArrays(1, &cubeVertexArrayID);
+        glBindVertexArray(cubeVertexArrayID);
+
+        // Create a vertex buffer object for the cube's vertices
+        glGenBuffers(1, &cubeVertexBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, cubeVertexBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(cube_vertex_buffer_data), cube_vertex_buffer_data, GL_STATIC_DRAW);
+
+        // Create a color buffer object for the cube's colors
+        glGenBuffers(1, &cubeColorBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, cubeColorBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(cube_color_buffer_data), cube_color_buffer_data, GL_STATIC_DRAW);
+
+        // Create an index buffer object for the cube's indices
+        glGenBuffers(1, &cubeIndexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeIndexBufferID);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_index_buffer_data), cube_index_buffer_data, GL_STATIC_DRAW);
+    }
 
 	void render(glm::mat4 cameraMatrix) {
-		glUseProgram(programID);
+        /*glUseProgram(programID);
 
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, colorBufferID);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-		glEnableVertexAttribArray(2);
-		glBindBuffer(GL_ARRAY_BUFFER, normalBufferID);
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
-
-		// Set model-view-projection matrix
-		glm::mat4 mvp = cameraMatrix;
-		glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
-
-		// Set light data
-		glUniform3fv(lightPositionID, 1, &lightPosition[0]);
-		glUniform3fv(lightIntensityID, 1, &lightIntensity[0]);
+        // Set light data
+        glUniform3fv(lightPositionID, 1, &lightPosition[0]);
+        glUniform3fv(lightIntensityID, 1, &lightIntensity[0]);
         glUniform3fv(ambientLightID, 1, &ambientLight[0]); // Pass ambient light
 
-		// Draw the box
-		glDrawElements(
-			GL_TRIANGLES,      // mode
-			30,    			   // number of indices
-			GL_UNSIGNED_INT,   // type
-			(void*)0           // element array buffer offset
-		);
+        // Render the Cornell Box
+        glBindVertexArray(vertexArrayID);
 
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-		glDisableVertexAttribArray(2);
-	}
+        glEnableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-	void cleanup() {
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, colorBufferID);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+        glEnableVertexAttribArray(2);
+        glBindBuffer(GL_ARRAY_BUFFER, normalBufferID);
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+
+        // Set model-view-projection matrix for the Cornell Box
+        glm::mat4 modelMatrixBox = glm::mat4(1.0f); // Identity matrix for the box
+        glm::mat4 mvpBox = cameraMatrix * modelMatrixBox;
+        glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvpBox[0][0]);
+
+        // Draw the Cornell Box
+        glDrawElements(GL_TRIANGLES, 30, GL_UNSIGNED_INT, 0);
+
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
+        glDisableVertexAttribArray(2);
+
+        // Render the Cube
+        glBindVertexArray(cubeVertexArrayID);
+
+        glEnableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, cubeVertexBufferID);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, cubeColorBufferID);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeIndexBufferID);
+
+        // Set model-view-projection matrix for the cube
+        glm::mat4 modelMatrixCube = glm::translate(glm::mat4(1.0f), glm::vec3(-400.0f, 50.0f, -275.0f)); // Adjust position as needed
+       glm::mat4 mvpCube = cameraMatrix * modelMatrixCube;
+        glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvpCube[0][0]);
+
+        // Draw the cube
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
+
+	}*/
+
+            glUseProgram(programID);
+
+            // Set light data
+            glUniform3fv(lightPositionID, 1, &lightPosition[0]);
+            glUniform3fv(lightIntensityID, 1, &lightIntensity[0]);
+            glUniform3fv(ambientLightID, 1, &ambientLight[0]); // Pass ambient light
+
+            // Render the Cornell Box
+            glBindVertexArray(vertexArrayID);
+
+            glEnableVertexAttribArray(0);
+            glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+            glEnableVertexAttribArray(1);
+            glBindBuffer(GL_ARRAY_BUFFER, colorBufferID);
+            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+            glEnableVertexAttribArray(2);
+            glBindBuffer(GL_ARRAY_BUFFER, normalBufferID);
+            glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+
+            // Set model-view-projection matrix for the Cornell Box
+            glm::mat4 modelMatrixBox = glm::mat4(1.0f); // Identity matrix for the box
+            glm::mat4 mvpBox = cameraMatrix * modelMatrixBox;
+            glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvpBox[0][0]);
+
+            // Draw the Cornell Box
+            glDrawElements(GL_TRIANGLES, 30, GL_UNSIGNED_INT, 0);
+
+            glDisableVertexAttribArray(0);
+            glDisableVertexAttribArray(1);
+            glDisableVertexAttribArray(2);
+
+            // Render the Cube
+            glBindVertexArray(cubeVertexArrayID);
+
+            glEnableVertexAttribArray(0);
+            glBindBuffer(GL_ARRAY_BUFFER, cubeVertexBufferID);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+            glEnableVertexAttribArray(1);
+            glBindBuffer(GL_ARRAY_BUFFER, cubeColorBufferID);
+            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeIndexBufferID);
+
+            // Set model-view-projection matrix for the cube
+            glm::mat4 modelMatrixCube = glm::translate(glm::mat4(1.0f),
+                                                       glm::vec3(-325.0f, 50.0f, -275.0f)); // Adjust position as needed
+            glm::mat4 mvpCube = cameraMatrix * modelMatrixCube;
+            glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvpCube[0][0]);
+
+            // Draw the cube
+            glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+            glDisableVertexAttribArray(0);
+            glDisableVertexAttribArray(1);
+
+        };
+
+
+            void cleanup() {
 		glDeleteBuffers(1, &vertexBufferID);
 		glDeleteBuffers(1, &colorBufferID);
 		glDeleteBuffers(1, &indexBufferID);
 		glDeleteBuffers(1, &normalBufferID);
 		glDeleteVertexArrays(1, &vertexArrayID);
 		glDeleteProgram(programID);
+        glDeleteBuffers(1, &cubeVertexBufferID);
+        glDeleteBuffers(1, &cubeColorBufferID);
+        glDeleteBuffers(1, &cubeIndexBufferID);
+        glDeleteVertexArrays(1, &cubeVertexArrayID);
 	}
 };
-void updateBackWallColor(CornellBox &box, const glm::vec3 &color) {
-    // Update the color buffer data for the back wall
-    for (int i = 16; i < 20; ++i) {
-        box.color_buffer_data[3 * i] = color.r;
-        box.color_buffer_data[3 * i + 1] = color.g;
-        box.color_buffer_data[3 * i + 2] = color.b;
-    }
-
-    // Update the color buffer in OpenGL
-    glBindBuffer(GL_ARRAY_BUFFER, box.colorBufferID);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(box.color_buffer_data), box.color_buffer_data);
-}
 
 int main(void)
 {
@@ -366,9 +646,9 @@ int main(void)
 	b.initialize();
 
     // Set the color of the back wall to a specific color (e.g., blue)
-     glm::vec3 backWallColor(0.36f, 0.25f, 0.20f);
+    // glm::vec3 backWallColor(0.36f, 0.25f, 0.20f);
 
-    updateBackWallColor(b, backWallColor);
+    //updateBackWallColor(b, backWallColor);
 
 	// Camera setup
     glm::mat4 viewMatrix, projectionMatrix;
@@ -378,10 +658,11 @@ int main(void)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		viewMatrix = glm::lookAt(eye_center, lookat, up);
-		glm::mat4 vp = projectionMatrix * viewMatrix;
+        glm::mat4 viewMatrix = glm::lookAt(eye_center, lookat, up);
+        glm::mat4 projectionMatrix = glm::perspective(glm::radians(FoV), (float)windowWidth / windowHeight, zNear, zFar);
+        glm::mat4 cameraMatrix = projectionMatrix * viewMatrix;
 
-		b.render(vp);
+		b.render(cameraMatrix);
 
 		if (saveDepth) {
             std::string filename = "depth_camera.png";
