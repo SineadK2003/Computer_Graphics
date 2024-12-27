@@ -10,7 +10,10 @@ out vec3 color;
 out vec3 worldPosition;
 out vec3 worldNormal;
 
+out vec4 lightSpacePos;
+
 uniform mat4 MVP;
+uniform mat4 lightSpaceMatrix;
 
 void main() {
     // Transform vertex
@@ -22,4 +25,5 @@ void main() {
     // World-space geometry 
     worldPosition = vertexPosition;
     worldNormal = vertexNormal;
+    lightSpacePos = lightSpaceMatrix * vec4(vertexPosition, 1.0);
 }
