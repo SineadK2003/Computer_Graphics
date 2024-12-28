@@ -34,8 +34,13 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 
 // OpenGL camera view parameters
 
-static glm::vec3 lookat(0.0f, 0.0f, 0.0f);
-glm::vec3 eye_center(0.0f, 0.0f, 0.0f); // Fixed camera position
+//static glm::vec3 lookat(0.0f, 0.0f, 0.0f);
+//glm::vec3 eye_center(0.0f, 0.0f, 0.0f); // Fixed camera position
+//glm::vec3 up(0.0f, 1.0f, 0.0f); // Up vector
+
+// Camera setup
+glm::vec3 eye_center(0.0f, 1000.0f, 2000.0f); // Set the camera position higher and further away
+glm::vec3 lookat(0.0f, 0.0f, 0.0f); // Look at the center of the scene
 glm::vec3 up(0.0f, 1.0f, 0.0f); // Up vector
 
 // View control
@@ -1370,7 +1375,7 @@ int main(void)
         //viewMatrix = glm::lookAt(eye_center, lookat, up);
        // glm::mat4 vp = projectionMatrix * viewMatrix;
         glm::mat4 viewMatrix = glm::lookAt(eye_center, lookat, up);
-        glm::mat4 projectionMatrix = glm::perspective(glm::radians(FoV), 1024.0f / 768.0f, 10.0f, 1000000000.0f); // Adjust far plane to a large value
+        glm::mat4 projectionMatrix = glm::perspective(glm::radians(FoV), 1024.0f / 768.0f, 10.0f, 1000000.0f); // Adjust far plane to a large value
         glm::mat4 vp = projectionMatrix * viewMatrix;
         sky.render(vp);
 
