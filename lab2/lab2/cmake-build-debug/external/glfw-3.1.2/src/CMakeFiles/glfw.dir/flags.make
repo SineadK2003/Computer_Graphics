@@ -6,5 +6,5 @@ C_FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /MP
 
 C_DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
 
-C_INCLUDES = -IC:\computerGraphics\lab2\external\glad-3.3\include -IC:\computerGraphics\lab2\external\glfw-3.1.2\src -IC:\computerGraphics\lab2\cmake-build-debug\external\glfw-3.1.2\src 
+C_INCLUDES = -IC:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\external\glad-3.3\include -IC:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\external\glfw-3.1.2\src -IC:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glfw-3.1.2\src 
 

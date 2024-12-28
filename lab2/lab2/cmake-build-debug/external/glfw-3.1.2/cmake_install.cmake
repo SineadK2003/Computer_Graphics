@@ -1,4 +1,4 @@
-# Install script for directory: C:/computerGraphics/lab2/external/glfw-3.1.2
+# Install script for directory: C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/external/glfw-3.1.2
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/computerGraphics/lab2/cmake-build-debug/external/glfw-3.1.2/src/cmake_install.cmake")
+  include("C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/cmake-build-debug/external/glfw-3.1.2/src/cmake_install.cmake")
 
 endif()
 

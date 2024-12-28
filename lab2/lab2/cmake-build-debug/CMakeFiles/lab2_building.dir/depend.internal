@@ -4,7 +4,7 @@
 CMakeFiles/lab2_building.dir/external/glad-3.3/src/gl.c.obj
  ../external/glad-3.3/include/KHR/khrplatform.h
  ../external/glad-3.3/include/glad/gl.h
- C:/computerGraphics/lab2/external/glad-3.3/src/gl.c
+ C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/external/glad-3.3/src/gl.c
 CMakeFiles/lab2_building.dir/lab2/lab2_building.cpp.obj
  ../external/glad-3.3/include/KHR/khrplatform.h
  ../external/glad-3.3/include/glad/gl.h
@@ -94,9 +94,9 @@ CMakeFiles/lab2_building.dir/lab2/lab2_building.cpp.obj
  ../external/glm-0.9.7.1/glm/vector_relational.hpp
  ../external/stb/stb_image.h
  ../lab2/render/shader.h
- C:/computerGraphics/lab2/lab2/lab2_building.cpp
+ C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/lab2/lab2_building.cpp
 CMakeFiles/lab2_building.dir/lab2/render/shader.cpp.obj
  ../external/glad-3.3/include/KHR/khrplatform.h
  ../external/glad-3.3/include/glad/gl.h
- C:/computerGraphics/lab2/lab2/render/shader.cpp
- C:/computerGraphics/lab2/lab2/render/shader.h
+ C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/lab2/render/shader.cpp
+ C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/lab2/render/shader.h

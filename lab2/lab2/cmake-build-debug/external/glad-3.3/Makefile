@@ -52,10 +52,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\computerGraphics\lab2
+CMAKE_SOURCE_DIR = C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\computerGraphics\lab2\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -84,18 +84,18 @@ rebuild_cache\fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd C:\computerGraphics\lab2\cmake-build-debug
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\computerGraphics\lab2\cmake-build-debug\CMakeFiles C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3\CMakeFiles\progress.marks
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\CMakeFiles C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\glad-3.3\all
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\computerGraphics\lab2\cmake-build-debug\CMakeFiles 0
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\glad-3.3\clean
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3
 .PHONY : clean
 
 # The main clean target
@@ -105,30 +105,30 @@ clean\fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\glad-3.3\preinstall
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall\fast:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\glad-3.3\preinstall
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3
 .PHONY : preinstall\fast
 
 # clear depends
 depend:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3
 .PHONY : depend
 
 # Convenience name for target.
 external\glad-3.3\CMakeFiles\glad.dir\rule:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\glad-3.3\CMakeFiles\glad.dir\rule
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3
 .PHONY : external\glad-3.3\CMakeFiles\glad.dir\rule
 
 # Convenience name for target.
@@ -138,9 +138,9 @@ glad: external\glad-3.3\CMakeFiles\glad.dir\rule
 
 # fast build rule for target.
 glad\fast:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f external\glad-3.3\CMakeFiles\glad.dir\build.make /nologo -$(MAKEFLAGS) external\glad-3.3\CMakeFiles\glad.dir\build
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3
 .PHONY : glad\fast
 
 src\gl.obj: src\gl.c.obj
@@ -149,9 +149,9 @@ src\gl.obj: src\gl.c.obj
 
 # target to build an object file
 src\gl.c.obj:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f external\glad-3.3\CMakeFiles\glad.dir\build.make /nologo -$(MAKEFLAGS) external\glad-3.3\CMakeFiles\glad.dir\src\gl.c.obj
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3
 .PHONY : src\gl.c.obj
 
 src\gl.i: src\gl.c.i
@@ -160,9 +160,9 @@ src\gl.i: src\gl.c.i
 
 # target to preprocess a source file
 src\gl.c.i:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f external\glad-3.3\CMakeFiles\glad.dir\build.make /nologo -$(MAKEFLAGS) external\glad-3.3\CMakeFiles\glad.dir\src\gl.c.i
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3
 .PHONY : src\gl.c.i
 
 src\gl.s: src\gl.c.s
@@ -171,9 +171,9 @@ src\gl.s: src\gl.c.s
 
 # target to generate assembly for a file
 src\gl.c.s:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f external\glad-3.3\CMakeFiles\glad.dir\build.make /nologo -$(MAKEFLAGS) external\glad-3.3\CMakeFiles\glad.dir\src\gl.c.s
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3
 .PHONY : src\gl.c.s
 
 # Help Target
@@ -199,8 +199,8 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glad-3.3
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glad-3.3
 .PHONY : cmake_check_build_system
 

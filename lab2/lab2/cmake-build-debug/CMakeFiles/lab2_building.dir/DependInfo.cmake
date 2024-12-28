@@ -5,7 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/computerGraphics/lab2/external/glad-3.3/src/gl.c" "C:/computerGraphics/lab2/cmake-build-debug/CMakeFiles/lab2_building.dir/external/glad-3.3/src/gl.c.obj"
+  "C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/external/glad-3.3/src/gl.c" "C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/cmake-build-debug/CMakeFiles/lab2_building.dir/external/glad-3.3/src/gl.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "MSVC")
 
@@ -18,8 +18,8 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "../lab2"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/computerGraphics/lab2/lab2/lab2_building.cpp" "C:/computerGraphics/lab2/cmake-build-debug/CMakeFiles/lab2_building.dir/lab2/lab2_building.cpp.obj"
-  "C:/computerGraphics/lab2/lab2/render/shader.cpp" "C:/computerGraphics/lab2/cmake-build-debug/CMakeFiles/lab2_building.dir/lab2/render/shader.cpp.obj"
+  "C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/lab2/lab2_building.cpp" "C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/cmake-build-debug/CMakeFiles/lab2_building.dir/lab2/lab2_building.cpp.obj"
+  "C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/lab2/render/shader.cpp" "C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/cmake-build-debug/CMakeFiles/lab2_building.dir/lab2/render/shader.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")
 
@@ -34,7 +34,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "C:/computerGraphics/lab2/cmake-build-debug/external/glfw-3.1.2/src/CMakeFiles/glfw.dir/DependInfo.cmake"
+  "C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/cmake-build-debug/external/glfw-3.1.2/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

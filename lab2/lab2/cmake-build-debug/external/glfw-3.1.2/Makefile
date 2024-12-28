@@ -52,10 +52,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\computerGraphics\lab2
+CMAKE_SOURCE_DIR = C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\computerGraphics\lab2\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -84,18 +84,18 @@ rebuild_cache\fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd C:\computerGraphics\lab2\cmake-build-debug
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\computerGraphics\lab2\cmake-build-debug\CMakeFiles C:\computerGraphics\lab2\cmake-build-debug\external\glfw-3.1.2\CMakeFiles\progress.marks
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\CMakeFiles C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glfw-3.1.2\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\glfw-3.1.2\all
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glfw-3.1.2
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\computerGraphics\lab2\cmake-build-debug\CMakeFiles 0
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glfw-3.1.2
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\glfw-3.1.2\clean
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glfw-3.1.2
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glfw-3.1.2
 .PHONY : clean
 
 # The main clean target
@@ -105,23 +105,23 @@ clean\fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\glfw-3.1.2\preinstall
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glfw-3.1.2
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glfw-3.1.2
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall\fast:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) external\glfw-3.1.2\preinstall
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glfw-3.1.2
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glfw-3.1.2
 .PHONY : preinstall\fast
 
 # clear depends
 depend:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glfw-3.1.2
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glfw-3.1.2
 .PHONY : depend
 
 # Help Target
@@ -143,8 +143,8 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd C:\computerGraphics\lab2\cmake-build-debug
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
-	cd C:\computerGraphics\lab2\cmake-build-debug\external\glfw-3.1.2
+	cd C:\Computer_Graphics_Git\Computer_Graphics\lab2\lab2\cmake-build-debug\external\glfw-3.1.2
 .PHONY : cmake_check_build_system
 

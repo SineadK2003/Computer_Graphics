@@ -1,4 +1,4 @@
-# Install script for directory: C:/computerGraphics/lab2/external/glad-3.3
+# Install script for directory: C:/Computer_Graphics_Git/Computer_Graphics/lab2/lab2/external/glad-3.3
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
