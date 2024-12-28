@@ -74,6 +74,18 @@ CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\constants.inl
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\matrix_transform.hpp
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\matrix_transform.inl
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\quaternion.hpp
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\quaternion.inl
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\type_precision.hpp
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\type_precision.inl
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\type_ptr.hpp
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\type_ptr.inl
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\vec1.hpp
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtc\vec1.inl
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtx\dual_quaternion.hpp
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtx\dual_quaternion.inl
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtx\string_cast.hpp
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\gtx\string_cast.inl
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\integer.hpp
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\mat2x2.hpp
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\mat2x3.hpp
@@ -93,6 +105,9 @@ CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\glm-0.9.7.1\glm\vector_relational.hpp
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\stb\stb_image.h
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\stb\stb_image_write.h
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\tinygltf-2.9.3\json.hpp
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\tinygltf-2.9.3\stb_image_write.h
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\tinygltf-2.9.3\tiny_gltf.h
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\finalProject\render\shader.h
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\finalProject\fp_skybox.cpp
 
