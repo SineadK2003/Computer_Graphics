@@ -1,0 +1,15 @@
+Determining if the include file pthread.h exists failed with the following output:
+Change Dir: C:/Computer_Graphics_Git/Computer_Graphics/finalProject/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_3fd30\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.42.34433\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_3fd30.dir\build.make /nologo -L                  CMakeFiles\cmTC_3fd30.dir\build
+Building C object CMakeFiles/cmTC_3fd30.dir/CheckIncludeFile.c.obj
+	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe @C:\Users\sinea\AppData\Local\Temp\nm36D7.tmp
+CheckIncludeFile.c
+C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'pthread.h': No such file or directory
+NMAKE : fatal error U1077: 'C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe @C:\Users\sinea\AppData\Local\Temp\nm36D7.tmp' : return code '0x2'
+Stop.
+NMAKE : fatal error U1077: '"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.42.34433\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_3fd30.dir\build.make /nologo -L                  CMakeFiles\cmTC_3fd30.dir\build' : return code '0x2'
+Stop.
+
+
+

@@ -1,0 +1,10 @@
+^C:\GRAPHICS\LAB2\EXTERNAL\GLAD-3.3\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/graphics/lab2 -BC:/graphics/lab2/build --check-stamp-file C:/graphics/lab2/build/external/glad-3.3/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
