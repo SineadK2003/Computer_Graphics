@@ -26,7 +26,9 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <iomanip>
+
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
+
 static GLFWwindow *window;
 static int windowWidth = 1024;
 static int windowHeight = 768;
@@ -35,13 +37,16 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 // OpenGL camera view parameters
 
 //static glm::vec3 lookat(0.0f, 0.0f, 0.0f);
-//glm::vec3 eye_center(0.0f, 0.0f, 0.0f); // Fixed camera position
+glm::vec3 eye_center(0.0f, 0.0f, 0.0f); // Fixed camera position
 //glm::vec3 up(0.0f, 1.0f, 0.0f); // Up vector
 
 // Camera setup
-glm::vec3 eye_center(0.0f, 1000.0f, 2000.0f); // Set the camera position higher and further away
+//glm::vec3 eye_center(0.0f, 1000.0f, 2000.0f); // Set the camera position higher and further away
 glm::vec3 lookat(0.0f, 0.0f, 0.0f); // Look at the center of the scene
 glm::vec3 up(0.0f, 1.0f, 0.0f); // Up vector
+static float FoV = 45.0f;
+static float zNear = 600.0f;
+static float zFar = 1500.0f;
 
 // View control
 static float viewAzimuth = 0.f;
@@ -50,13 +55,6 @@ static float viewDistance = 300.0f;
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 static void cursor_callback(GLFWwindow* window, double xpos, double ypos);
-
-
-static float FoV = 45.0f;
-static float zNear = 600.0f;
-static float zFar = 1500.0f;
-
-
 
 // TODO: set these parameters
 static float depthFoV = 90.0f;
@@ -299,7 +297,7 @@ struct Skybox {
         textureSamplerID = glGetUniformLocation(programID, "textureSampler");
     }
 
-    void render(glm::mat4 cameraMatrix) {
+   void render(glm::mat4 cameraMatrix) {
         glUseProgram(programID);
 
         glBindVertexArray(vertexArrayID);
@@ -348,6 +346,64 @@ struct Skybox {
         glDisableVertexAttribArray(1);
         glDisableVertexAttribArray(2);
     }
+
+   /*void render(glm::mat4 viewMatrix, glm::mat4 projectionMatrix) {
+       glUseProgram(programID);
+
+       glBindVertexArray(vertexArrayID);
+
+       glEnableVertexAttribArray(0);
+       glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+       glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+       glEnableVertexAttribArray(1);
+       glBindBuffer(GL_ARRAY_BUFFER, colorBufferID);
+       glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+
+       // Position the skybox at the camera's position
+       glm::mat4 modelMatrix = glm::mat4(1.0f);
+       modelMatrix = glm::translate(modelMatrix, eye_center);
+
+       // Scale the skybox
+       modelMatrix = glm::scale(modelMatrix, glm::vec3(5000.0f)); // Adjust the scale as needed
+
+       // Remove translation from the view matrix
+       glm::mat4 viewMatrixNoTranslation = glm::mat4(glm::mat3(viewMatrix));
+
+       // Set model-view-projection matrix
+       glm::mat4 mvp = projectionMatrix * viewMatrixNoTranslation * modelMatrix;
+       glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
+
+       // Enable UV buffer and texture sampler
+       glEnableVertexAttribArray(2);
+       glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
+       glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
+       // Set textureSampler to use texture unit 0
+       glActiveTexture(GL_TEXTURE0);
+       glBindTexture(GL_TEXTURE_2D, textureID);
+       glUniform1i(textureSamplerID, 0);
+
+       // Disable depth testing
+       glDisable(GL_DEPTH_TEST);
+
+       // Draw the skybox
+       glDrawElements(
+               GL_TRIANGLES,      // mode
+               36,    			   // number of indices
+               GL_UNSIGNED_INT,   // type
+               (void*)0           // element array buffer offset
+       );
+
+       // Re-enable depth testing
+       glEnable(GL_DEPTH_TEST);
+
+       glDisableVertexAttribArray(0);
+       glDisableVertexAttribArray(1);
+       glDisableVertexAttribArray(2);
+   }*/
 
     void cleanup() {
         glDeleteBuffers(1, &vertexBufferID);
@@ -528,7 +584,7 @@ struct Building {
         this->position = position;
         this->scale = scale;
 
-        glClearColor(0.537f, 0.812f, 0.941f, 1.0f); // Set the background color to baby blue
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set the background color to baby blue
 
 
         // Create a vertex array object
@@ -1266,15 +1322,14 @@ int main(void)
     glEnable(GL_CULL_FACE);
 
     // Background
-    glClearColor(0.2f, 0.2f, 0.25f, 0.0f);
-
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
 
     // TODO: Create more buildings
     // ---------------------------
     Skybox sky;
-    sky.initialize(glm::vec3(eye_center.x, eye_center.y - 5000, eye_center.z), glm::vec3(5000, 5000, 5000),"C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\background\\planet.jpeg");
+    sky.initialize(glm::vec3(eye_center.x, eye_center.y - 5000, eye_center.z), glm::vec3(5000, 5000, 5000),"C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\background\\planet8.jpeg");
 
 
     // Seed the random number generator
@@ -1289,23 +1344,12 @@ int main(void)
     // Add more textures as needed
     // Create multiple buildings
     std::vector<Building> buildings;
-    int numBuildings = 500; // Adjust this number to add more buildings
+    int numBuildings = 200; // Adjust this number to add more buildings
 
     for (int i = 0; i < numBuildings; ++i) {
         buildings.push_back(Building());
     }
 
-    /*for (int i = 0; i < numBuildings; ++i) {
-
-        float height = 1.0f + static_cast<float>(rand() % 50 + 1); // Random height between 1 and 51
-        float width = 1.0f + static_cast<float>(rand() % 10 + 1);  // Random width between 1 and 11
-        float depth = 1.0f + static_cast<float>(rand() % 10 + 1);  // Random depth between 1 and 11
-
-        float xPos = static_cast<float>(rand() % 300 - 100); // Random x position between -20 and 20
-        float zPos = static_cast<float>(rand() % 300 - 100); // Random z position between -20 and 20
-        buildings[i].initialize(glm::vec3(xPos, 0.0f, zPos), glm::vec3(1.0f, height, 1.0f));
-        buildings[i].setTexture(textures[i % textures.size()]);
-    }*/
     for (int i = 0; i < numBuildings; ++i) {
         // Increase the size range for buildings
         float height = 10.0f + static_cast<float>(rand() % 100 + 1); // Random height between 10 and 110
@@ -1372,13 +1416,18 @@ int main(void)
         }
 
         // Rendering
-        //viewMatrix = glm::lookAt(eye_center, lookat, up);
-       // glm::mat4 vp = projectionMatrix * viewMatrix;
+        viewMatrix = glm::lookAt(eye_center, lookat, up);
+        glm::mat4 vp = projectionMatrix * viewMatrix;
         glm::mat4 viewMatrix = glm::lookAt(eye_center, lookat, up);
         glm::mat4 projectionMatrix = glm::perspective(glm::radians(FoV), 1024.0f / 768.0f, 10.0f, 1000000.0f); // Adjust far plane to a large value
-        glm::mat4 vp = projectionMatrix * viewMatrix;
-        sky.render(vp);
+        glm::mat4 vp1 = projectionMatrix * viewMatrix;
+        sky.render(vp1);
 
+       /*glm::mat4 viewMatrix = glm::lookAt(eye_center, lookat, up);
+        glm::mat4 projectionMatrix = glm::perspective(glm::radians(FoV), 1024.0f / 768.0f, 10.0f, 1000000.0f); // Adjust far plane to a large value
+        sky.render(viewMatrix, projectionMatrix);
+
+        glm::mat4 vp = projectionMatrix * viewMatrix;*/
         // Render the buildings
         for (auto& building : buildings) {
             building.render(vp);
@@ -1556,15 +1605,16 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         eye_center.z = viewDistance * sin(viewAzimuth);
         std::cout << "Reset." << std::endl;
     }
+    float moveSpeed = 5.0f; // Increase this value to speed up the camera movement
 
     if (key == GLFW_KEY_UP && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
-        lookat.y += 1.0f;
+        lookat.y += moveSpeed;
     }
 
     if (key == GLFW_KEY_DOWN && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
-        lookat.y -= 1.0f;
+        lookat.y -= moveSpeed;
     }
 
     /* if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
