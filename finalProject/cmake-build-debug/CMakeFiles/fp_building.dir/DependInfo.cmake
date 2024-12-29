@@ -20,7 +20,6 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "../finalProject"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Computer_Graphics_Git/Computer_Graphics/finalProject/finalProject/fp_building.cpp" "C:/Computer_Graphics_Git/Computer_Graphics/finalProject/cmake-build-debug/CMakeFiles/fp_building.dir/finalProject/fp_building.cpp.obj"
   "C:/Computer_Graphics_Git/Computer_Graphics/finalProject/finalProject/render/shader.cpp" "C:/Computer_Graphics_Git/Computer_Graphics/finalProject/cmake-build-debug/CMakeFiles/fp_building.dir/finalProject/render/shader.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")

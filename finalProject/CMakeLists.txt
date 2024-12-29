@@ -34,7 +34,6 @@ set(GLEW_SOURCES
 
 # Add executable for fp_building
 add_executable(fp_building
-        finalProject/fp_building.cpp
         finalProject/render/shader.cpp
         ${GLAD_SOURCES}  # Add glad source file
         ${GLEW_SOURCES}  # Add glew source file
@@ -62,7 +61,6 @@ target_link_libraries(fp_skybox
 
 # Add executable for fp_skybox
 add_executable(fp_main
-        finalProject/fp_main.cpp
         finalProject/render/shader.cpp
         ${GLAD_SOURCES}  # Add glad source file
         ${GLEW_SOURCES}  # Add glew source file

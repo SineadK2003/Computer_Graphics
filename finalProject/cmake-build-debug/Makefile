@@ -245,60 +245,6 @@ external\glew-2.1.0\src\glew.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_main.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_main.dir\external\glew-2.1.0\src\glew.c.s
 .PHONY : external\glew-2.1.0\src\glew.c.s
 
-finalProject\fp_building.obj: finalProject\fp_building.cpp.obj
-
-.PHONY : finalProject\fp_building.obj
-
-# target to build an object file
-finalProject\fp_building.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_building.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_building.dir\finalProject\fp_building.cpp.obj
-.PHONY : finalProject\fp_building.cpp.obj
-
-finalProject\fp_building.i: finalProject\fp_building.cpp.i
-
-.PHONY : finalProject\fp_building.i
-
-# target to preprocess a source file
-finalProject\fp_building.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_building.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_building.dir\finalProject\fp_building.cpp.i
-.PHONY : finalProject\fp_building.cpp.i
-
-finalProject\fp_building.s: finalProject\fp_building.cpp.s
-
-.PHONY : finalProject\fp_building.s
-
-# target to generate assembly for a file
-finalProject\fp_building.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_building.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_building.dir\finalProject\fp_building.cpp.s
-.PHONY : finalProject\fp_building.cpp.s
-
-finalProject\fp_main.obj: finalProject\fp_main.cpp.obj
-
-.PHONY : finalProject\fp_main.obj
-
-# target to build an object file
-finalProject\fp_main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_main.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_main.dir\finalProject\fp_main.cpp.obj
-.PHONY : finalProject\fp_main.cpp.obj
-
-finalProject\fp_main.i: finalProject\fp_main.cpp.i
-
-.PHONY : finalProject\fp_main.i
-
-# target to preprocess a source file
-finalProject\fp_main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_main.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_main.dir\finalProject\fp_main.cpp.i
-.PHONY : finalProject\fp_main.cpp.i
-
-finalProject\fp_main.s: finalProject\fp_main.cpp.s
-
-.PHONY : finalProject\fp_main.s
-
-# target to generate assembly for a file
-finalProject\fp_main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_main.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_main.dir\finalProject\fp_main.cpp.s
-.PHONY : finalProject\fp_main.cpp.s
-
 finalProject\fp_skybox.obj: finalProject\fp_skybox.cpp.obj
 
 .PHONY : finalProject\fp_skybox.obj
@@ -378,12 +324,6 @@ help:
 	@echo ... external/glew-2.1.0/src/glew.obj
 	@echo ... external/glew-2.1.0/src/glew.i
 	@echo ... external/glew-2.1.0/src/glew.s
-	@echo ... finalProject/fp_building.obj
-	@echo ... finalProject/fp_building.i
-	@echo ... finalProject/fp_building.s
-	@echo ... finalProject/fp_main.obj
-	@echo ... finalProject/fp_main.i
-	@echo ... finalProject/fp_main.s
 	@echo ... finalProject/fp_skybox.obj
 	@echo ... finalProject/fp_skybox.i
 	@echo ... finalProject/fp_skybox.s

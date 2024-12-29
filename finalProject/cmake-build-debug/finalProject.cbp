@@ -380,12 +380,6 @@
 		<Unit filename="C:/Computer_Graphics_Git/Computer_Graphics/finalProject/external/glfw-3.1.2/src/winmm_joystick.h">
 			<Option target="glfw"/>
 		</Unit>
-		<Unit filename="C:/Computer_Graphics_Git/Computer_Graphics/finalProject/finalProject/fp_building.cpp">
-			<Option target="fp_building"/>
-		</Unit>
-		<Unit filename="C:/Computer_Graphics_Git/Computer_Graphics/finalProject/finalProject/fp_main.cpp">
-			<Option target="fp_main"/>
-		</Unit>
 		<Unit filename="C:/Computer_Graphics_Git/Computer_Graphics/finalProject/finalProject/fp_skybox.cpp">
 			<Option target="fp_skybox"/>
 		</Unit>

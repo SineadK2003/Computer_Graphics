@@ -1344,13 +1344,7 @@ ext/stdio_filebuf.h
 TargetConditionals.h
 ../external/tinygltf-2.9.3/TargetConditionals.h
 
-../finalProject/render/shader.h
-glad/gl.h
--
-string
--
-
-C:/Computer_Graphics_Git/Computer_Graphics/finalProject/finalProject/fp_skybox.cpp
+../finalProject/render/headers.h
 stb/stb_image.h
 -
 stb/stb_image_write.h
@@ -1378,5 +1372,19 @@ iostream
 math.h
 -
 iomanip
+-
+
+../finalProject/render/loadTextureTileBox.cpp
+
+../finalProject/render/shader.h
+glad/gl.h
+-
+string
+-
+
+C:/Computer_Graphics_Git/Computer_Graphics/finalProject/finalProject/fp_skybox.cpp
+render/headers.h
+-
+render/loadTextureTileBox.cpp
 -
 

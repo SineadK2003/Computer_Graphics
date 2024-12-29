@@ -115,6 +115,8 @@ CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\stb\stb_ima
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\tinygltf-2.9.3\json.hpp
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\tinygltf-2.9.3\stb_image_write.h
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\external\tinygltf-2.9.3\tiny_gltf.h
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\finalProject\render\headers.h
+CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\finalProject\render\loadTextureTileBox.cpp
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\finalProject\render\shader.h
 CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj: ..\finalProject\fp_skybox.cpp
 

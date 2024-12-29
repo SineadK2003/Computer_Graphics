@@ -61,28 +61,9 @@ include CMakeFiles\fp_building.dir\progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles\fp_building.dir\flags.make
 
-CMakeFiles\fp_building.dir\finalProject\fp_building.cpp.obj: CMakeFiles\fp_building.dir\flags.make
-CMakeFiles\fp_building.dir\finalProject\fp_building.cpp.obj: ..\finalProject\fp_building.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/fp_building.dir/finalProject/fp_building.cpp.obj"
-	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\fp_building.dir\finalProject\fp_building.cpp.obj /FdCMakeFiles\fp_building.dir\ /FS -c C:\Computer_Graphics_Git\Computer_Graphics\finalProject\finalProject\fp_building.cpp
-<<
-
-CMakeFiles\fp_building.dir\finalProject\fp_building.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/fp_building.dir/finalProject/fp_building.cpp.i"
-	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe > CMakeFiles\fp_building.dir\finalProject\fp_building.cpp.i @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Computer_Graphics_Git\Computer_Graphics\finalProject\finalProject\fp_building.cpp
-<<
-
-CMakeFiles\fp_building.dir\finalProject\fp_building.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/fp_building.dir/finalProject/fp_building.cpp.s"
-	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\fp_building.dir\finalProject\fp_building.cpp.s /c C:\Computer_Graphics_Git\Computer_Graphics\finalProject\finalProject\fp_building.cpp
-<<
-
 CMakeFiles\fp_building.dir\finalProject\render\shader.cpp.obj: CMakeFiles\fp_building.dir\flags.make
 CMakeFiles\fp_building.dir\finalProject\render\shader.cpp.obj: ..\finalProject\render\shader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/fp_building.dir/finalProject/render/shader.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/fp_building.dir/finalProject/render/shader.cpp.obj"
 	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\fp_building.dir\finalProject\render\shader.cpp.obj /FdCMakeFiles\fp_building.dir\ /FS -c C:\Computer_Graphics_Git\Computer_Graphics\finalProject\finalProject\render\shader.cpp
 <<
@@ -101,7 +82,7 @@ CMakeFiles\fp_building.dir\finalProject\render\shader.cpp.s: cmake_force
 
 CMakeFiles\fp_building.dir\external\glad-3.3\src\gl.c.obj: CMakeFiles\fp_building.dir\flags.make
 CMakeFiles\fp_building.dir\external\glad-3.3\src\gl.c.obj: ..\external\glad-3.3\src\gl.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/fp_building.dir/external/glad-3.3/src/gl.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/fp_building.dir/external/glad-3.3/src/gl.c.obj"
 	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe @<<
  /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoCMakeFiles\fp_building.dir\external\glad-3.3\src\gl.c.obj /FdCMakeFiles\fp_building.dir\ /FS -c C:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glad-3.3\src\gl.c
 <<
@@ -120,7 +101,7 @@ CMakeFiles\fp_building.dir\external\glad-3.3\src\gl.c.s: cmake_force
 
 CMakeFiles\fp_building.dir\external\glew-2.1.0\src\glew.c.obj: CMakeFiles\fp_building.dir\flags.make
 CMakeFiles\fp_building.dir\external\glew-2.1.0\src\glew.c.obj: ..\external\glew-2.1.0\src\glew.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/fp_building.dir/external/glew-2.1.0/src/glew.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/fp_building.dir/external/glew-2.1.0/src/glew.c.obj"
 	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe @<<
  /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoCMakeFiles\fp_building.dir\external\glew-2.1.0\src\glew.c.obj /FdCMakeFiles\fp_building.dir\ /FS -c C:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glew-2.1.0\src\glew.c
 <<
@@ -139,7 +120,6 @@ CMakeFiles\fp_building.dir\external\glew-2.1.0\src\glew.c.s: cmake_force
 
 # Object files for target fp_building
 fp_building_OBJECTS = \
-"CMakeFiles\fp_building.dir\finalProject\fp_building.cpp.obj" \
 "CMakeFiles\fp_building.dir\finalProject\render\shader.cpp.obj" \
 "CMakeFiles\fp_building.dir\external\glad-3.3\src\gl.c.obj" \
 "CMakeFiles\fp_building.dir\external\glew-2.1.0\src\glew.c.obj"
@@ -147,14 +127,13 @@ fp_building_OBJECTS = \
 # External object files for target fp_building
 fp_building_EXTERNAL_OBJECTS =
 
-fp_building.exe: CMakeFiles\fp_building.dir\finalProject\fp_building.cpp.obj
 fp_building.exe: CMakeFiles\fp_building.dir\finalProject\render\shader.cpp.obj
 fp_building.exe: CMakeFiles\fp_building.dir\external\glad-3.3\src\gl.c.obj
 fp_building.exe: CMakeFiles\fp_building.dir\external\glew-2.1.0\src\glew.c.obj
 fp_building.exe: CMakeFiles\fp_building.dir\build.make
 fp_building.exe: glfw3dll.lib
 fp_building.exe: CMakeFiles\fp_building.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable fp_building.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable fp_building.exe"
 	"C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\fp_building.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100220~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100220~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\fp_building.dir\objects1.rsp @<<
  /out:fp_building.exe /implib:fp_building.lib /pdb:C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\fp_building.pdb /version:0.0  /machine:X86 /debug /INCREMENTAL /subsystem:console  opengl32.lib glu32.lib glfw3dll.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<

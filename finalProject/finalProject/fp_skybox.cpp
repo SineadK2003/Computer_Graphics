@@ -1,34 +1,5 @@
-// Prevent tinygltf from including its own STB implementations
-#define TINYGLTF_NO_STB_IMAGE
-#define TINYGLTF_NO_STB_IMAGE_WRITE
-
-// Include your STB implementations
-#define STB_IMAGE_IMPLEMENTATION
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include <stb/stb_image.h>
-#include <stb/stb_image_write.h>
-
-// Include tinygltf
-#define TINYGLTF_IMPLEMENTATION
-#include <tinygltf-2.9.3/tiny_gltf.h>
-
-// Other includes
-//#include <GL/glew.h>
-#include <glad/gl.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/string_cast.hpp>
-#include <render/shader.h>
-
-#include <vector>
-#include <iostream>
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <iomanip>
-
-#define BUFFER_OFFSET(i) ((char *)NULL + (i))
+#include <render/headers.h>
+#include <render/loadTextureTileBox.cpp>
 
 static GLFWwindow *window;
 static int windowWidth = 1024;
@@ -106,30 +77,6 @@ static void saveDepthTexture(GLuint fbo, std::string filename) {
     for (int i = 0; i < width * height; ++i) img[3 * i] = img[3 * i + 1] = img[3 * i + 2] = depth[i] * 255;
 
     stbi_write_png(filename.c_str(), width, height, channels, img.data(), width * channels);
-}
-
-static GLuint LoadTextureTileBox(const char *texture_file_path) {
-    int w, h, channels;
-    uint8_t* img = stbi_load(texture_file_path, &w, &h, &channels, 3);
-    GLuint texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-
-    // To tile textures on a box, we set wrapping to repeat
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    if (img) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    } else {
-        std::cout << "Failed to load texture " << texture_file_path << std::endl;
-    }
-    stbi_image_free(img);
-
-    return texture;
 }
 
 struct Skybox {
@@ -611,314 +558,6 @@ struct Building {
         glDeleteVertexArrays(1, &vertexArrayID);
         //glDeleteBuffers(1, &uvBufferID);
         //glDeleteTextures(1, &textureID);
-        glDeleteProgram(programID);
-    }
-};
-
-struct Building1 {
-    glm::vec3 position;		// Position of the box
-    glm::vec3 scale;		// Size of the box in each axis
-
-    GLfloat vertex_buffer_data[72] = {	// Vertex definition for a canonical box
-            // Front face
-            -1.0f, -1.0f, 1.0f,
-            1.0f, -1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f, 1.0f,
-
-            // Back face
-            1.0f, -1.0f, -1.0f,
-            -1.0f, -1.0f, -1.0f,
-            -1.0f, 1.0f, -1.0f,
-            1.0f, 1.0f, -1.0f,
-
-            // Left face
-            -1.0f, -1.0f, -1.0f,
-            -1.0f, -1.0f, 1.0f,
-            -1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f, -1.0f,
-
-            // Right face
-            1.0f, -1.0f, 1.0f,
-            1.0f, -1.0f, -1.0f,
-            1.0f, 1.0f, -1.0f,
-            1.0f, 1.0f, 1.0f,
-
-            // Top face
-            -1.0f, 1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,
-            1.0f, 1.0f, -1.0f,
-            -1.0f, 1.0f, -1.0f,
-
-            // Bottom face
-            -1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f, 1.0f,
-            -1.0f, -1.0f, 1.0f,
-    };
-
-    GLfloat normal_buffer_data[72] = {
-            // Front face
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-
-            // Back face
-            0.0f, 0.0f, -1.0f,
-            0.0f, 0.0f, -1.0f,
-            0.0f, 0.0f, -1.0f,
-            0.0f, 0.0f, -1.0f,
-
-            // Left face
-            -1.0f, 0.0f, 0.0f,
-            -1.0f, 0.0f, 0.0f,
-            -1.0f, 0.0f, 0.0f,
-            -1.0f, 0.0f, 0.0f,
-
-            // Right face
-            1.0f, 0.0f, 0.0f,
-            1.0f, 0.0f, 0.0f,
-            1.0f, 0.0f, 0.0f,
-            1.0f, 0.0f, 0.0f,
-
-            // Top face
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-
-            // Bottom face
-            0.0f, -1.0f, 0.0f,
-            0.0f, -1.0f, 0.0f,
-            0.0f, -1.0f, 0.0f,
-            0.0f, -1.0f, 0.0f
-    };
-
-    GLfloat color_buffer_data[72] = {
-            // Front, red
-            1.0f, 0.0f, 0.0f,
-            1.0f, 0.0f, 0.0f,
-            1.0f, 0.0f, 0.0f,
-            1.0f, 0.0f, 0.0f,
-
-            // Back, yellow
-            1.0f, 1.0f, 0.0f,
-            1.0f, 1.0f, 0.0f,
-            1.0f, 1.0f, 0.0f,
-            1.0f, 1.0f, 0.0f,
-
-            // Left, green
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-
-            // Right, cyan
-            0.0f, 1.0f, 1.0f,
-            0.0f, 1.0f, 1.0f,
-            0.0f, 1.0f, 1.0f,
-            0.0f, 1.0f, 1.0f,
-
-            // Top, blue
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-
-            // Bottom, magenta
-            1.0f, 0.0f, 1.0f,
-            1.0f, 0.0f, 1.0f,
-            1.0f, 0.0f, 1.0f,
-            1.0f, 0.0f, 1.0f,
-    };
-
-    GLuint index_buffer_data[36] = {		// 12 triangle faces of a box
-            0, 1, 2,
-            0, 2, 3,
-
-            4, 5, 6,
-            4, 6, 7,
-
-            8, 9, 10,
-            8, 10, 11,
-
-            12, 13, 14,
-            12, 14, 15,
-
-            16, 17, 18,
-            16, 18, 19,
-
-            20, 21, 22,
-            20, 22, 23,
-    };
-
-    GLfloat uv_buffer_data[48] = {
-            // Front
-            0.0f, 1.0f,
-            1.0f, 1.0f,
-            1.0f, 0.0f,
-            0.0f, 0.0f,
-            // Back
-            0.0f, 1.0f,
-            1.0f, 1.0f,
-            1.0f, 0.0f,
-            0.0f, 0.0f,
-            // Left
-            0.0f, 1.0f,
-            1.0f, 1.0f,
-            1.0f, 0.0f,
-            0.0f, 0.0f,
-            // Right
-            0.0f, 1.0f,
-            1.0f, 1.0f,
-            1.0f, 0.0f,
-            0.0f, 0.0f,
-            // Top - we do not want texture the top
-            0.0f, 0.0f,
-            0.0f, 0.0f,
-            0.0f, 0.0f,
-            0.0f, 0.0f,
-            // Bottom - we do not want texture the bottom
-            0.0f, 0.0f,
-            0.0f, 0.0f,
-            0.0f, 0.0f,
-            0.0f, 0.0f,
-    };
-
-    // OpenGL buffers
-    GLuint vertexArrayID;
-    GLuint vertexBufferID;
-    GLuint indexBufferID;
-    GLuint colorBufferID;
-    GLuint uvBufferID;
-    GLuint textureID;
-    GLuint normalBufferID;
-
-    // Shader variable IDs
-    GLuint modelMatrixID;
-    GLuint mvpMatrixID;
-    GLuint textureSamplerID;
-    GLuint lightMatrixID;
-    GLuint lightPositionID;
-    GLuint lightIntensityID;
-    GLuint exposureID;
-    GLuint programID;
-    GLuint depthMap1ID;
-
-    void initialize(glm::vec3 position, glm::vec3 scale, const char* texturePath) {
-        // Define scale of the building geometry
-        this->position = position;
-        this->scale = scale;
-
-        // Create a vertex array object
-        glGenVertexArrays(1, &vertexArrayID);
-        glBindVertexArray(vertexArrayID);
-
-        // Create a vertex buffer object to store the vertex data
-        glGenBuffers(1, &vertexBufferID);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-        // Create a vertex buffer object to store the color data
-        glGenBuffers(1, &colorBufferID);
-        glBindBuffer(GL_ARRAY_BUFFER, colorBufferID);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(color_buffer_data), color_buffer_data, GL_STATIC_DRAW);
-        glEnableVertexAttribArray(3);
-        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-        // Scale up the v-coordinate for texture tiling along the height
-        for (int i = 0; i < 24; ++i) {
-            uv_buffer_data[2 * i + 1] *= 5;
-        }
-
-        glGenBuffers(1, &uvBufferID);
-        glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(uv_buffer_data), uv_buffer_data,GL_STATIC_DRAW);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-        glGenBuffers(1, &normalBufferID);
-        glBindBuffer(GL_ARRAY_BUFFER, normalBufferID);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(normal_buffer_data), normal_buffer_data, GL_STATIC_DRAW);
-        glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-        // Create an index buffer object to store the index data that defines triangle faces
-        glGenBuffers(1, &indexBufferID);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_buffer_data), index_buffer_data, GL_STATIC_DRAW);
-
-        // Create and compile our GLSL program from the shaders
-        programID = LoadShadersFromFile("../lab4/shader/buildLight.vert", "../lab4/shader/buildLight.frag");
-        if (programID == 0)
-        {
-            std::cerr << "Failed to load shaders." << std::endl;
-        }
-
-        // Get a handle for our "MVP" uniform
-        modelMatrixID = glGetUniformLocation(programID, "modelMatrix");
-        mvpMatrixID = glGetUniformLocation(programID, "MVP");
-        textureID = LoadTextureTileBox(texturePath);
-        textureSamplerID = glGetUniformLocation(programID,"textureSampler");
-        lightMatrixID = glGetUniformLocation(programID, "LightMVP");
-        lightPositionID = glGetUniformLocation(programID, "lightPosition");
-        lightIntensityID = glGetUniformLocation(programID, "lightIntensity");
-        exposureID = glGetUniformLocation(programID, "exposure");
-        depthMap1ID = glGetUniformLocation(programID, "depthMap");
-    }
-
-
-    void render(glm::mat4 cameraMatrix,float exposureVal, glm::mat4 lightPositionMatrix, glm::vec3 lightPosition, glm::vec3 lightIntensity) {
-        glUseProgram(programID);
-        glBindVertexArray(vertexArrayID);
-
-        glm::mat4 modelMatrix = glm::mat4(1.0f);
-        modelMatrix = glm::translate(modelMatrix, position);
-        modelMatrix = glm::scale(modelMatrix, scale);
-
-        glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
-
-        // Set model-view-projection matrix
-        glm::mat4 mvp = cameraMatrix * modelMatrix;
-        glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
-
-        glm::mat4 mvp1 = lightPositionMatrix;
-        glUniformMatrix4fv(lightMatrixID, 1, GL_FALSE, &mvp1[0][0]);
-
-        glUniform1f(exposureID, exposureVal);
-
-        // Set light data
-        glUniform3fv(lightPositionID, 1, &lightPosition[0]);
-        glUniform3fv(lightIntensityID, 1, &lightIntensity[0]);
-
-        // Set textureSampler to use texture unit 0
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureID);
-        glUniform1i(textureSamplerID, 0);
-
-        // Draw the box
-        glDrawElements(
-                GL_TRIANGLES,      // mode
-                36,    			   // number of indices
-                GL_UNSIGNED_INT,   // type
-                (void*)0           // element array buffer offset
-        );
-
-        glBindVertexArray(0);
-        glUseProgram(0);
-    }
-
-    void cleanup() {
-        glDeleteBuffers(1, &vertexBufferID);
-        glDeleteBuffers(1, &colorBufferID);
-        glDeleteBuffers(1, &indexBufferID);
-        glDeleteVertexArrays(1, &vertexArrayID);
-        glDeleteBuffers(1, &uvBufferID);
-        glDeleteTextures(1, &textureID);
-        glDeleteBuffers(1, &normalBufferID);
         glDeleteProgram(programID);
     }
 };
@@ -1835,7 +1474,7 @@ int main(void) {
     // Set the key callback
     glfwSetKeyCallback(window, key_callback);
     // Set input callbacks
-   glfwSetCursorPosCallback(window, cursor_callback);
+    glfwSetCursorPosCallback(window, cursor_callback);
     glfwSetScrollCallback(window, scroll_callback);
 
 
@@ -1905,38 +1544,38 @@ int main(void) {
     }
 
 
-   /* std::vector<GLuint> treeTextures;
-    treeTextures.push_back(LoadTextureTileBox(
-            "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\tree3.png"));
+    /* std::vector<GLuint> treeTextures;
+     treeTextures.push_back(LoadTextureTileBox(
+             "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\tree3.png"));
 
-    std::vector<Rocket> trees;
-    int numTrees = 20; // Adjust this number to add more buildings
+     std::vector<Rocket> trees;
+     int numTrees = 20; // Adjust this number to add more buildings
 
-    for (int i = 0; i < numTrees; ++i) {
-        trees.push_back(Rocket());
-    }
+     for (int i = 0; i < numTrees; ++i) {
+         trees.push_back(Rocket());
+     }
 
-    for (int i = 0; i < numTrees; ++i) {
-        // Increase the size range for buildings
-        // Increase the size range for buildings
-        float height_t = 25.0f ; // Random height between 10 and 110
-        float width_t = 25.0f;   // Random width between 10 and 30
-        float depth_t = 25.0f;   // Random depth between 10 and 30
+     for (int i = 0; i < numTrees; ++i) {
+         // Increase the size range for buildings
+         // Increase the size range for buildings
+         float height_t = 25.0f ; // Random height between 10 and 110
+         float width_t = 25.0f;   // Random width between 10 and 30
+         float depth_t = 25.0f;   // Random depth between 10 and 30
 
-        glm::vec3 size_t(width_t, height_t, depth_t);
-        glm::vec3 position_t;
+         glm::vec3 size_t(width_t, height_t, depth_t);
+         glm::vec3 position_t;
 
-        // Ensure trees do not overlap with buildings
-        do {
-            position_t.x = static_cast<float>(rand() % 2000 - 1000); // Random x position between -1000 and 1000
-            position_t.z = static_cast<float>(rand() % 2000 - 1000); // Random z position between -1000 and 1000
-        } while (isPositionInBuilding(position_t, size_t, buildings, buffer));
+         // Ensure trees do not overlap with buildings
+         do {
+             position_t.x = static_cast<float>(rand() % 2000 - 1000); // Random x position between -1000 and 1000
+             position_t.z = static_cast<float>(rand() % 2000 - 1000); // Random z position between -1000 and 1000
+         } while (isPositionInBuilding(position_t, size_t, buildings, buffer));
 
-        trees[i].initialize(position_t, size_t);
-        trees[i].setTexture(treeTextures[i % treeTextures.size()]);
-        std::cout << "Tree initialized at position: (" << position_t.x << ", 0, " << position_t.z << ") with size: (" << width_t << ", " << height_t << ", " << depth_t << ")" << std::endl;
+         trees[i].initialize(position_t, size_t);
+         trees[i].setTexture(treeTextures[i % treeTextures.size()]);
+         std::cout << "Tree initialized at position: (" << position_t.x << ", 0, " << position_t.z << ") with size: (" << width_t << ", " << height_t << ", " << depth_t << ")" << std::endl;
 
-}*/
+ }*/
 
     std::vector<GLuint> rocketTextures;
     rocketTextures.push_back(LoadTextureTileBox(
@@ -2106,7 +1745,7 @@ void updateCameraPosition()
 void update_view_matrix() {
 
     viewMatrix = glm::lookAt(eye_center, eye_center + glm::vec3(0.0f, 0.0f, -1.0f), up);
-    }
+}
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode) {
     float moveSpeed = 10.0f; // Increase this value to speed up the camera movement
     float verticalBoundary = 1500.0f; // Define the vertical boundary for the camera
@@ -2141,10 +1780,18 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         eye_center.z = viewDistance * sin(viewAzimuth);
     }
 
+    if (key == GLFW_KEY_N && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
+        eye_center.z -= moveSpeed;
+    }
+
+    if (key == GLFW_KEY_M && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
+        eye_center.z += moveSpeed;
+    }
+
     if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
         viewAzimuth += 0.1f;
         eye_center.x = viewDistance * cos(viewAzimuth);
-       eye_center.z = viewDistance * sin(viewAzimuth);
+        eye_center.z = viewDistance * sin(viewAzimuth);
         //eye_center.x += 0.95f; // Move the camera to the right
         //update_view_matrix();
     }
