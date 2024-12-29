@@ -1035,10 +1035,19 @@ struct MyBot {
 
         return res;
     }
-    void initialize(const glm::vec3& pos) {
+    /*void initialize(const glm::vec3& pos) {
         position = pos;
         if (!loadModel(model, "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\model\\bot\\bot.gltf")) {
             return;
+        }
+        // Apply scaling transformation
+        glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f)); // Scale down by 50%
+        for (auto& node : model.nodes) {
+            if (node.matrix.size() == 16) {
+                glm::mat4 nodeMatrix = glm::make_mat4(node.matrix.data());
+                nodeMatrix = scaleMatrix * nodeMatrix;
+                std::copy(glm::value_ptr(nodeMatrix), glm::value_ptr(nodeMatrix) + 16, node.matrix.begin());
+            }
         }
 
         // Prepare buffers for rendering
@@ -1054,6 +1063,81 @@ struct MyBot {
         programID = LoadShadersFromFile("C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\shader\\bot.vert", "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\shader\\bot.frag");
         if (programID == 0)
         {
+            std::cerr << "Failed to load shaders." << std::endl;
+        }
+
+        nodeStates.resize(model.nodes.size());
+        for (size_t i = 0; i < model.nodes.size(); ++i) {
+            const tinygltf::Node &node = model.nodes[i];
+
+            NodeState &state = nodeStates[i];
+            // Translation
+            if (node.translation.size() == 3) {
+                state.translation = glm::vec3(node.translation[0], node.translation[1], node.translation[2]);
+            } else {
+                state.translation = glm::vec3(0.0f);
+            }
+            // Rotation
+            if (node.rotation.size() == 4) {
+                state.rotation = glm::quat(node.rotation[3], node.rotation[0], node.rotation[1], node.rotation[2]);
+            } else {
+                state.rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+            }
+            // Scale
+            if (node.scale.size() == 3) {
+                state.scale = glm::vec3(node.scale[0], node.scale[1], node.scale[2]);
+            } else {
+                state.scale = glm::vec3(1.0f);
+            }
+        }
+
+        // Get a handle for GLSL variables
+        mvpMatrixID = glGetUniformLocation(programID, "MVP");
+        lightPositionID = glGetUniformLocation(programID, "lightPosition");
+        lightIntensityID = glGetUniformLocation(programID, "lightIntensity");
+        jointMatricesID = glGetUniformLocation(programID, "jointMatrices");
+    }*/
+
+    void initialize(const glm::vec3& pos) {
+        position = pos;
+        if (!loadModel(model, "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\model\\bot\\bot.gltf")) {
+            return;
+        }
+
+        // Apply scaling transformation
+        glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f)); // Adjust the scale factor as needed
+        for (auto& node : model.nodes) {
+            if (node.matrix.size() == 16) {
+                glm::mat4 nodeMatrix = glm::make_mat4(node.matrix.data());
+                nodeMatrix = scaleMatrix * nodeMatrix;
+                std::copy(glm::value_ptr(nodeMatrix), glm::value_ptr(nodeMatrix) + 16, node.matrix.begin());
+            } else {
+                // Apply scaling to translation, rotation, and scale if matrix is not present
+                if (node.translation.size() == 3) {
+                    node.translation[0] *= 0.1f;
+                    node.translation[1] *= 0.1f;
+                    node.translation[2] *= 0.1f;
+                }
+                if (node.scale.size() == 3) {
+                    node.scale[0] *= 0.1f;
+                    node.scale[1] *= 0.1f;
+                    node.scale[2] *= 0.1f;
+                }
+            }
+        }
+
+        // Prepare buffers for rendering
+        primitiveObjects = bindModel(model);
+
+        // Prepare joint matrices
+        skinObjects = prepareSkinning(model);
+
+        // Prepare animation data
+        animationObjects = prepareAnimation(model);
+
+        // Create and compile our GLSL program from the shaders
+        programID = LoadShadersFromFile("C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\shader\\bot.vert", "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\shader\\bot.frag");
+        if (programID == 0) {
             std::cerr << "Failed to load shaders." << std::endl;
         }
 
@@ -1266,8 +1350,7 @@ struct MyBot {
         glDeleteProgram(programID);
     }
 
-    private:
-        glm::vec3 position;
+    glm::vec3 position;
 };
 
 bool isPositionInBuilding(const glm::vec3& position, const std::vector<Building>& buildings) {
@@ -1282,11 +1365,9 @@ bool isPositionInBuilding(const glm::vec3& position, const std::vector<Building>
     return false;
 }
 
-int main(void)
-{
+int main(void) {
     // Initialise GLFW
-    if (!glfwInit())
-    {
+    if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW." << std::endl;
         return -1;
     }
@@ -1298,8 +1379,7 @@ int main(void)
 
     // Open a window and create its OpenGL context
     window = glfwCreateWindow(1024, 768, "Final Project", NULL, NULL);
-    if (window == NULL)
-    {
+    if (window == NULL) {
         std::cerr << "Failed to open a GLFW window." << std::endl;
         glfwTerminate();
         return -1;
@@ -1312,8 +1392,7 @@ int main(void)
 
     // Load OpenGL functions, gladLoadGL returns the loaded version, 0 on error.
     int version = gladLoadGL(glfwGetProcAddress);
-    if (version == 0)
-    {
+    if (version == 0) {
         std::cerr << "Failed to initialize OpenGL context." << std::endl;
         return -1;
     }
@@ -1329,7 +1408,8 @@ int main(void)
     // TODO: Create more buildings
     // ---------------------------
     Skybox sky;
-    sky.initialize(glm::vec3(eye_center.x, eye_center.y - 5000, eye_center.z), glm::vec3(5000, 5000, 5000),"C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\background\\planet8.jpeg");
+    sky.initialize(glm::vec3(eye_center.x, eye_center.y - 5000, eye_center.z), glm::vec3(5000, 5000, 5000),
+                   "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\background\\planet8.jpeg");
 
 
     // Seed the random number generator
@@ -1337,10 +1417,14 @@ int main(void)
 
     //Declare and initialize the textures vector
     std::vector<GLuint> textures;
-    textures.push_back(LoadTextureTileBox("C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\facade6.jpg"));
-    textures.push_back(LoadTextureTileBox("C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\facade7.jpg"));
-    textures.push_back(LoadTextureTileBox("C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\facade8.jpg"));
-    textures.push_back(LoadTextureTileBox("C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\facade9.jpg"));
+    textures.push_back(LoadTextureTileBox(
+            "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\facade6.jpg"));
+    textures.push_back(LoadTextureTileBox(
+            "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\facade7.jpg"));
+    textures.push_back(LoadTextureTileBox(
+            "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\facade8.jpg"));
+    textures.push_back(LoadTextureTileBox(
+            "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\facade9.jpg"));
     // Add more textures as needed
     // Create multiple buildings
     std::vector<Building> buildings;
@@ -1363,44 +1447,61 @@ int main(void)
         buildings[i].initialize(glm::vec3(xPos, 0.0f, zPos), glm::vec3(width, height, depth));
         buildings[i].setTexture(textures[i % textures.size()]);
     }
-
     // Create multiple bots
     std::vector<MyBot> bots;
     int numBots = 10; // Adjust this number to add more bots
+    float minDistance = 50.0f; // Minimum distance between bots
 
     for (int i = 0; i < numBots; ++i) {
         MyBot bot;
         glm::vec3 botPosition;
+        bool positionValid;
+
         do {
+            positionValid = true;
             // Generate random positions for bots
             botPosition.x = static_cast<float>(rand() % 2000 - 1000); // Random x position between -1000 and 1000
             botPosition.z = static_cast<float>(rand() % 2000 - 1000); // Random z position between -1000 and 1000
             botPosition.y = 0.0f; // Assuming bots are on the ground level
-        } while (isPositionInBuilding(botPosition, buildings)); // Check if the position is within a building
+
+            // Check if the position is within a building
+            if (isPositionInBuilding(botPosition, buildings)) {
+                positionValid = false;
+                continue;
+            }
+
+            // Check distance from other bots
+            for (const auto &existingBot : bots) {
+                if (glm::distance(botPosition, existingBot.position) < minDistance) {
+                    positionValid = false;
+                    break;
+                }
+            }
+        } while (!positionValid);
 
         bot.initialize(botPosition);
         bots.push_back(bot);
     }
-    // Camera setup
+
+// Camera setup
     eye_center.y = viewDistance * cos(viewPolar);
     eye_center.x = viewDistance * cos(viewAzimuth);
     eye_center.z = viewDistance * sin(viewAzimuth);
 
     glm::mat4 viewMatrix, projectionMatrix;
-    glm::float32 FoV = 45.0f;
-    glm::float32 zNear = 100.0f;
-    glm::float32 zFar = 0.0f;
-    projectionMatrix = glm::perspective(glm::radians(FoV), 1024.0f/768.0f, 10.0f, 10000.0f);
+    float FoV = 45.0f;
+    float zNear = 10.0f;
+    float zFar = 10000.0f;
+    projectionMatrix = glm::perspective(glm::radians(FoV), 1024.0f / 768.0f, zNear, zFar);
 
-    // Time and frame rate tracking
+// Time and frame rate tracking
     static double lastTime = glfwGetTime();
-    float time = 0.0f;			// Animation time
-    float fTime = 0.0f;			// Time for measuring fps
+    float time = 0.0f; // Animation time
+    float fTime = 0.0f; // Time for measuring fps
     unsigned long frames = 0;
 
-    // Main loop
-    do
-    {
+// Main loop
+    do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Update states for animation
@@ -1410,7 +1511,7 @@ int main(void)
 
         if (playAnimation) {
             time += deltaTime * playbackSpeed;
-            for (auto& bot : bots) {
+            for (auto &bot : bots) {
                 bot.update(time);
             }
         }
@@ -1418,23 +1519,17 @@ int main(void)
         // Rendering
         viewMatrix = glm::lookAt(eye_center, lookat, up);
         glm::mat4 vp = projectionMatrix * viewMatrix;
-        glm::mat4 viewMatrix = glm::lookAt(eye_center, lookat, up);
-        glm::mat4 projectionMatrix = glm::perspective(glm::radians(FoV), 1024.0f / 768.0f, 10.0f, 1000000.0f); // Adjust far plane to a large value
-        glm::mat4 vp1 = projectionMatrix * viewMatrix;
-        sky.render(vp1);
 
-       /*glm::mat4 viewMatrix = glm::lookAt(eye_center, lookat, up);
-        glm::mat4 projectionMatrix = glm::perspective(glm::radians(FoV), 1024.0f / 768.0f, 10.0f, 1000000.0f); // Adjust far plane to a large value
-        sky.render(viewMatrix, projectionMatrix);
+        // Render the skybox
+        sky.render(vp);
 
-        glm::mat4 vp = projectionMatrix * viewMatrix;*/
         // Render the buildings
-        for (auto& building : buildings) {
+        for (auto &building : buildings) {
             building.render(vp);
         }
 
         // Render the bots
-        for (auto& bot : bots) {
+        for (auto &bot : bots) {
             bot.render(vp);
         }
 
@@ -1459,13 +1554,14 @@ int main(void)
 
 // Clean up
     sky.cleanup();
-    for (auto& bot : bots) {
+    for (auto &bot : bots) {
         bot.cleanup();
     }
-    // Close OpenGL window and terminate GLFW
+// Close OpenGL window and terminate GLFW
     glfwTerminate();
     return 0;
 }
+
 
 // Is called whenever a key is pressed/released via GLFW
 /*void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
