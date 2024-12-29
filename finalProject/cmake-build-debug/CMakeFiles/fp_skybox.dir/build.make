@@ -118,11 +118,31 @@ CMakeFiles\fp_skybox.dir\external\glad-3.3\src\gl.c.s: cmake_force
  /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoNUL /FAs /FaCMakeFiles\fp_skybox.dir\external\glad-3.3\src\gl.c.s /c C:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glad-3.3\src\gl.c
 <<
 
+CMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.obj: CMakeFiles\fp_skybox.dir\flags.make
+CMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.obj: ..\external\glew-2.1.0\src\glew.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/fp_skybox.dir/external/glew-2.1.0/src/glew.c.obj"
+	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe @<<
+ /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoCMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.obj /FdCMakeFiles\fp_skybox.dir\ /FS -c C:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glew-2.1.0\src\glew.c
+<<
+
+CMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fp_skybox.dir/external/glew-2.1.0/src/glew.c.i"
+	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe > CMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.i @<<
+ /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glew-2.1.0\src\glew.c
+<<
+
+CMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fp_skybox.dir/external/glew-2.1.0/src/glew.c.s"
+	C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\cl.exe @<<
+ /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoNUL /FAs /FaCMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.s /c C:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glew-2.1.0\src\glew.c
+<<
+
 # Object files for target fp_skybox
 fp_skybox_OBJECTS = \
 "CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj" \
 "CMakeFiles\fp_skybox.dir\finalProject\render\shader.cpp.obj" \
-"CMakeFiles\fp_skybox.dir\external\glad-3.3\src\gl.c.obj"
+"CMakeFiles\fp_skybox.dir\external\glad-3.3\src\gl.c.obj" \
+"CMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.obj"
 
 # External object files for target fp_skybox
 fp_skybox_EXTERNAL_OBJECTS =
@@ -130,10 +150,11 @@ fp_skybox_EXTERNAL_OBJECTS =
 fp_skybox.exe: CMakeFiles\fp_skybox.dir\finalProject\fp_skybox.cpp.obj
 fp_skybox.exe: CMakeFiles\fp_skybox.dir\finalProject\render\shader.cpp.obj
 fp_skybox.exe: CMakeFiles\fp_skybox.dir\external\glad-3.3\src\gl.c.obj
+fp_skybox.exe: CMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.obj
 fp_skybox.exe: CMakeFiles\fp_skybox.dir\build.make
 fp_skybox.exe: glfw3dll.lib
 fp_skybox.exe: CMakeFiles\fp_skybox.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable fp_skybox.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable fp_skybox.exe"
 	"C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\fp_skybox.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100220~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100220~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~2\2022\BUILDT~1\VC\Tools\MSVC\1442~1.344\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\fp_skybox.dir\objects1.rsp @<<
  /out:fp_skybox.exe /implib:fp_skybox.lib /pdb:C:\Computer_Graphics_Git\Computer_Graphics\finalProject\cmake-build-debug\fp_skybox.pdb /version:0.0  /machine:X86 /debug /INCREMENTAL /subsystem:console  opengl32.lib glu32.lib glfw3dll.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<

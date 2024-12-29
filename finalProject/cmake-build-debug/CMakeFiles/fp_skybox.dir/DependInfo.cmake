@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "C:/Computer_Graphics_Git/Computer_Graphics/finalProject/external/glad-3.3/src/gl.c" "C:/Computer_Graphics_Git/Computer_Graphics/finalProject/cmake-build-debug/CMakeFiles/fp_skybox.dir/external/glad-3.3/src/gl.c.obj"
+  "C:/Computer_Graphics_Git/Computer_Graphics/finalProject/external/glew-2.1.0/src/glew.c" "C:/Computer_Graphics_Git/Computer_Graphics/finalProject/cmake-build-debug/CMakeFiles/fp_skybox.dir/external/glew-2.1.0/src/glew.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "MSVC")
 
@@ -14,6 +15,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "../external/glfw-3.1.2/include"
   "../external/glm-0.9.7.1"
   "../external/glad-3.3/include"
+  "../external/glew-2.1.0/include"
   "../external"
   "../finalProject"
   )
@@ -28,6 +30,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../external/glfw-3.1.2/include"
   "../external/glm-0.9.7.1"
   "../external/glad-3.3/include"
+  "../external/glew-2.1.0/include"
   "../external"
   "../finalProject"
   )

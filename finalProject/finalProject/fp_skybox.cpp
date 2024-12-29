@@ -13,6 +13,7 @@
 #include <tinygltf-2.9.3/tiny_gltf.h>
 
 // Other includes
+//#include <GL/glew.h>
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -40,21 +41,33 @@ glm::vec3 eye_center(0.0f, 0.0f, 0.0f); // Set the camera position higher and fu
 glm::vec3 lookat(0.0f, 0.0f, -1.0f); // Look at the center of the scene
 glm::vec3 up(0.0f, 1.0f, 0.0f); // Up vector
 static float FoV = 45.0f;
-static float zNear = 600.0f;
-static float zFar = 1500.0f;
+static float zNear = 0.1f;
+static float zFar = 10000.0f;
 
-// Camera parameters
-
+// Lighting control
+const glm::vec3 wave500(0.0f, 255.0f, 146.0f);
+const glm::vec3 wave600(255.0f, 190.0f, 0.0f);
+const glm::vec3 wave700(205.0f, 0.0f, 0.0f);
+static glm::vec3 lightIntensity = 5.0f * (8.0f * wave500 + 15.6f * wave600 + 18.4f * wave700);
+static glm::vec3 lightPosition(-275.0f, 500.0f, -275.0f);
 
 // View control
 static float viewAzimuth = 0.f;
 static float viewPolar = 0.f;
 static float viewDistance = 200.0f;
 
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-static void cursor_callback(GLFWwindow* window, double xpos, double ypos);
+// Shadow mapping
+static glm::vec3 lightUp(0.0f, -1.0f, 0.0f); //Light facing down
+GLuint shadowFBO;
+glm::vec3 boxCenter(-275.0f, 274.4f, -279.6f);
+GLuint depthTexture;
+GLuint depthProgramID;
+GLuint lightSpaceMatrixLocation;
+glm::mat4 lightSpaceMatrix;
+static int shadowMapWidth = 1024;
+static int shadowMapHeight = 1024;
 
-
+// View Parameters
 static float depthFoV = 90.0f;
 static float depthNear = 90.0f;
 static float depthFar = 1000.0f;
@@ -62,14 +75,33 @@ static float depthFar = 1000.0f;
 // Helper flag and function to save depth maps for debugging
 static bool saveDepth = false;
 
-// Lighting
-static glm::vec3 lightIntensity(5e6f, 5e6f, 5e6f);
-static glm::vec3 lightPosition(-275.0f, 500.0f, 800.0f);
-
 // Animation
 static bool playAnimation = true;
 static float playbackSpeed = 2.0f;
 
+
+// This function retrieves and stores the depth map of the default frame buffer
+// or a particular frame buffer (indicated by FBO ID) to a PNG image.
+static void saveDepthTexture(GLuint fbo, std::string filename) {
+    int width = shadowMapWidth;
+    int height = shadowMapHeight;
+    if (shadowMapWidth == 0 || shadowMapHeight == 0) {
+        width = windowWidth;
+        height = windowHeight;
+    }
+    int channels = 3;
+
+    std::vector<float> depth(width * height);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glReadBuffer(GL_DEPTH_COMPONENT);
+    glReadPixels(0, 0, width, height, GL_DEPTH_COMPONENT, GL_FLOAT, depth.data());
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    std::vector<unsigned char> img(width * height * 3);
+    for (int i = 0; i < width * height; ++i) img[3 * i] = img[3 * i + 1] = img[3 * i + 2] = depth[i] * 255;
+
+    stbi_write_png(filename.c_str(), width, height, channels, img.data(), width * channels);
+}
 
 static GLuint LoadTextureTileBox(const char *texture_file_path) {
     int w, h, channels;
@@ -498,6 +530,272 @@ struct Building {
 
         // Create a vertex buffer object to store the UV data
         for (int i = 0; i < 24; ++i) uv_buffer_data[2*i+1] *= 5;
+        glGenBuffers(1, &uvBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(uv_buffer_data), uv_buffer_data,
+                     GL_STATIC_DRAW);
+
+        // Create an index buffer object to store the index data that defines triangle faces
+        glGenBuffers(1, &indexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_buffer_data), index_buffer_data, GL_STATIC_DRAW);
+
+        // Create and compile our GLSL program from the shaders
+        programID = LoadShadersFromFile("C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\shader\\box.vert", "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\shader\\box.frag");
+        if (programID == 0)
+        {
+            std::cerr << "Failed to load shaders." << std::endl;
+        }
+
+        // Get a handle for our "MVP" uniform
+        mvpMatrixID = glGetUniformLocation(programID, "MVP");
+
+        // Get a handle to texture sampler
+        textureSamplerID = glGetUniformLocation(programID,"textureSampler");
+    }
+
+
+    void render(glm::mat4 cameraMatrix) {
+        glUseProgram(programID);
+
+        glEnableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, colorBufferID);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+
+
+        // Enable UV buffer and texture sampler
+        glEnableVertexAttribArray(2);
+        glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        glUniform1i(textureSamplerID, 0);
+
+        // Model transform
+        glm::mat4 modelMatrix = glm::mat4();
+        modelMatrix = glm::translate(modelMatrix, position); // Translate to the building's position
+        modelMatrix = glm::scale(modelMatrix, scale);        // Scale the building
+
+        // Set model-view-projection matrix
+        glm::mat4 mvp = cameraMatrix * modelMatrix;
+        glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
+
+        // Draw the box
+        glDrawElements(
+                GL_TRIANGLES,      // mode
+                36,                // number of indices
+                GL_UNSIGNED_INT,   // type
+                (void*)0           // element array buffer offset
+        );
+
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
+        glDisableVertexAttribArray(2);
+    }
+
+    void cleanup() {
+        glDeleteBuffers(1, &vertexBufferID);
+        glDeleteBuffers(1, &colorBufferID);
+        glDeleteBuffers(1, &indexBufferID);
+        glDeleteVertexArrays(1, &vertexArrayID);
+        //glDeleteBuffers(1, &uvBufferID);
+        //glDeleteTextures(1, &textureID);
+        glDeleteProgram(programID);
+    }
+};
+
+struct Rocket {
+    glm::vec3 position;		// Position of the box
+    glm::vec3 scale;		// Size of the box in each axis
+    glm::vec3 dimensions;
+    void setTexture(GLuint tex) {
+        textureID = tex;
+    }
+    GLfloat vertex_buffer_data[72] = {	// Vertex definition for a canonical box
+            // Front face
+            -1.0f, -1.0f, 1.0f,
+            1.0f, -1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            -1.0f, 1.0f, 1.0f,
+
+            // Back face
+            1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f, -1.0f,
+            -1.0f, 1.0f, -1.0f,
+            1.0f, 1.0f, -1.0f,
+
+            // Left face
+            -1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f, 1.0f,
+            -1.0f, 1.0f, 1.0f,
+            -1.0f, 1.0f, -1.0f,
+
+            // Right face
+            1.0f, -1.0f, 1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, 1.0f, -1.0f,
+            1.0f, 1.0f, 1.0f,
+
+            // Top face
+            -1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, -1.0f,
+            -1.0f, 1.0f, -1.0f,
+
+            // Bottom face
+            -1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, 1.0f,
+            -1.0f, -1.0f, 1.0f,
+    };
+
+    GLfloat color_buffer_data[72] = {
+            // Front, red
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+
+            // Back, yellow
+            1.0f, 1.0f, 0.0f,
+            1.0f, 1.0f, 0.0f,
+            1.0f, 1.0f, 0.0f,
+            1.0f, 1.0f, 0.0f,
+
+            // Left, green
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+
+            // Right, cyan
+            0.0f, 1.0f, 1.0f,
+            0.0f, 1.0f, 1.0f,
+            0.0f, 1.0f, 1.0f,
+            0.0f, 1.0f, 1.0f,
+
+            // Top, blue
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+
+            // Bottom, magenta
+            1.0f, 0.0f, 1.0f,
+            1.0f, 0.0f, 1.0f,
+            1.0f, 0.0f, 1.0f,
+            1.0f, 0.0f, 1.0f,
+    };
+
+    GLuint index_buffer_data[36] = {		// 12 triangle faces of a box
+            0, 1, 2,
+            0, 2, 3,
+
+            4, 5, 6,
+            4, 6, 7,
+
+            8, 9, 10,
+            8, 10, 11,
+
+            12, 13, 14,
+            12, 14, 15,
+
+            16, 17, 18,
+            16, 18, 19,
+
+            20, 21, 22,
+            20, 22, 23,
+    };
+
+    GLfloat uv_buffer_data[48] = {
+            // Front (+Z)
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 0.0f,
+
+            // Back (-Z)
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 0.0f,
+
+            // Left (+X)
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 0.0f,
+
+            // Right (-X)
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 0.0f,
+
+            // Top (+Y)
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 0.0f,
+
+            // Bottom (-Y)
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 0.0f
+    };
+
+    // OpenGL buffers
+    GLuint vertexArrayID;
+    GLuint vertexBufferID;
+    GLuint indexBufferID;
+    GLuint colorBufferID;
+    GLuint uvBufferID;
+    GLuint textureID;
+
+    // Shader variable IDs
+    GLuint mvpMatrixID;
+    GLuint textureSamplerID;
+    GLuint programID;
+
+    glm::vec3 getPosition() const {
+        return position;
+    }
+
+    glm::vec3 getSize() const {
+        return dimensions;
+    }
+
+    void initialize(glm::vec3 position, glm::vec3 scale) {
+        // Define scale of the building geometry
+        this->position = position;
+        this->scale = scale;
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set the background color to baby blue
+
+
+        // Create a vertex array object
+        glGenVertexArrays(1, &vertexArrayID);
+        glBindVertexArray(vertexArrayID);
+
+        // Create a vertex buffer object to store the vertex data
+        glGenBuffers(1, &vertexBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
+
+        // Create a vertex buffer object to store the color data
+        glGenBuffers(1, &colorBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, colorBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(color_buffer_data), color_buffer_data, GL_STATIC_DRAW);
+
+        // Create a vertex buffer object to store the UV data
+       // for (int i = 0; i < 24; ++i) uv_buffer_data[2*i+1] *= 5;
         glGenBuffers(1, &uvBufferID);
         glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
         glBufferData(GL_ARRAY_BUFFER, sizeof(uv_buffer_data), uv_buffer_data,
@@ -1183,12 +1481,12 @@ struct MyBot {
     glm::vec3 position;
 };
 
-bool isPositionInBuilding(const glm::vec3& position, const std::vector<Building>& buildings) {
+bool isPositionInBuilding(const glm::vec3& position, const glm::vec3& size, const std::vector<Building>& buildings, float buffer) {
     for (const auto& building : buildings) {
         glm::vec3 buildingPos = building.getPosition();
         glm::vec3 buildingSize = building.getSize();
-        if (position.x >= buildingPos.x && position.x <= buildingPos.x + buildingSize.x &&
-            position.z >= buildingPos.z && position.z <= buildingPos.z + buildingSize.z) {
+        if (position.x < buildingPos.x + buildingSize.x + buffer && position.x + size.x + buffer > buildingPos.x &&
+            position.z < buildingPos.z + buildingSize.z + buffer && position.z + size.z + buffer > buildingPos.z) {
             return true;
         }
     }
@@ -1196,6 +1494,7 @@ bool isPositionInBuilding(const glm::vec3& position, const std::vector<Building>
 }
 
 int main(void) {
+
     // Initialise GLFW
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW." << std::endl;
@@ -1254,6 +1553,7 @@ int main(void) {
     textures.push_back(LoadTextureTileBox(
             "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\facade9.jpg"));
     // Add more textures as needed
+
     // Create multiple buildings
     std::vector<Building> buildings;
     int numBuildings = 200; // Adjust this number to add more buildings
@@ -1262,56 +1562,120 @@ int main(void) {
         buildings.push_back(Building());
     }
 
+    float buffer = 40.0f; // Adjust this value to increase or decrease the buffer zone
+
     for (int i = 0; i < numBuildings; ++i) {
         // Increase the size range for buildings
         float height = 10.0f + static_cast<float>(rand() % 100 + 1); // Random height between 10 and 110
         float width = 10.0f + static_cast<float>(rand() % 20 + 1);   // Random width between 10 and 30
         float depth = 10.0f + static_cast<float>(rand() % 20 + 1);   // Random depth between 10 and 30
 
-        // Increase the range for position generation
-        float xPos = static_cast<float>(rand() % 2000 - 1000); // Random x position between -1000 and 1000
-        float zPos = static_cast<float>(rand() % 2000 - 1000); // Random z position between -1000 and 1000
+        glm::vec3 size(width, height, depth);
+        glm::vec3 position;
 
-        buildings[i].initialize(glm::vec3(xPos, 0.0f, zPos), glm::vec3(width, height, depth));
+        // Ensure buildings do not overlap
+        do {
+            position.x = static_cast<float>(rand() % 2000 - 1000); // Random x position between -1000 and 1000
+            position.z = static_cast<float>(rand() % 2000 - 1000); // Random z position between -1000 and 1000
+        } while (isPositionInBuilding(position, size, buildings, buffer));
+
+        buildings[i].initialize(position, size);
         buildings[i].setTexture(textures[i % textures.size()]);
     }
+
+
+    /*std::vector<GLuint> treeTextures;
+    treeTextures.push_back(LoadTextureTileBox(
+            "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\tree.jpeg"));
+
+    std::vector<Building> trees;
+    int numTrees = 20; // Adjust this number to add more buildings
+
+    for (int i = 0; i < numTrees; ++i) {
+        trees.push_back(Building());
+    }
+
+    for (int i = 0; i < numTrees; ++i) {
+        // Increase the size range for buildings
+        // Increase the size range for buildings
+        float height_t = 25.0f ; // Random height between 10 and 110
+        float width_t = 25.0f;   // Random width between 10 and 30
+        float depth_t = 25.0f;   // Random depth between 10 and 30
+
+        glm::vec3 size_t(width_t, height_t, depth_t);
+        glm::vec3 position_t;
+
+        // Ensure trees do not overlap with buildings
+        do {
+            position_t.x = static_cast<float>(rand() % 2000 - 1000); // Random x position between -1000 and 1000
+            position_t.z = static_cast<float>(rand() % 2000 - 1000); // Random z position between -1000 and 1000
+        } while (isPositionInBuilding(position_t, size_t, buildings, buffer));
+
+        trees[i].initialize(position_t, size_t);
+        trees[i].setTexture(treeTextures[i % treeTextures.size()]);
+        std::cout << "Tree initialized at position: (" << position_t.x << ", 0, " << position_t.z << ") with size: (" << width_t << ", " << height_t << ", " << depth_t << ")" << std::endl;
+
+}*/
+
+    std::vector<GLuint> rocketTextures;
+    rocketTextures.push_back(LoadTextureTileBox(
+            "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\rocket.jpeg"));
+
+    std::vector<Rocket> rockets;
+    int numRockets = 20; // Adjust this number to add more buildings
+
+    for (int i = 0; i < numRockets; ++i) {
+        rockets.push_back(Rocket());
+    }
+
+    for (int i = 0; i < numRockets; ++i) {
+        // Increase the size range for buildings
+        // Increase the size range for buildings
+        float height_r = 25.0f ; // Random height between 10 and 110
+        float width_r = 25.0f;   // Random width between 10 and 30
+        float depth_r = 25.0f;   // Random depth between 10 and 30
+
+        glm::vec3 size_t(width_r, height_r, depth_r);
+        glm::vec3 position_r;
+
+        // Ensure trees do not overlap with buildings
+        do {
+            position_r.x = static_cast<float>(rand() % 2000 - 1000); // Random x position between -1000 and 1000
+            position_r.z = static_cast<float>(rand() % 2000 - 1000); // Random z position between -1000 and 1000
+            position_r.y = static_cast<float>(rand() % 700 + 300);   // Random y position between 100 and 600 (sky level)
+        } while (isPositionInBuilding(position_r, size_t, buildings, buffer));
+
+        rockets[i].initialize(position_r, size_t);
+        rockets[i].setTexture(rocketTextures[i % rocketTextures.size()]);
+}
+
+
+    /*// Seed the random number generator
+    srand(static_cast<unsigned int>(time(0)));
+
     // Create multiple bots
     std::vector<MyBot> bots;
-    int numBots = 10; // Adjust this number to add more bots
+    int numBots = 20; // Adjust this number to add more bots
 
     for (int i = 0; i < numBots; ++i) {
         bots.push_back(MyBot());
     }
 
     for (int i = 0; i < numBots; ++i) {
-        glm::vec3 botPosition;
-        bool positionValid;
 
-        do {
-            positionValid = true;
-            // Generate random positions for bots
-            botPosition.x = static_cast<float>(rand() % 2000 - 1000); // Random x position between -1000 and 1000
-            botPosition.z = static_cast<float>(rand() % 2000 - 1000); // Random z position between -1000 and 1000
-            botPosition.y = 0.0f; // Assuming bots are on the ground level
+        // Increase the range for position generation
+        float xPos = static_cast<float>(rand() % 2000 - 1000); // Random x position between -1000 and 1000
+        float zPos = static_cast<float>(rand() % 2000 - 1000); // Random z position between -1000 and 1000
 
-            // Check if the position is within a building
-            if (isPositionInBuilding(botPosition, buildings)) {
-                positionValid = false;
-                continue;
-            }
+        bots[i].initialize(glm::vec3(xPos, 0.0f, zPos));
 
-            // Check distance from other bots
-            for (const auto& existingBot : bots) {
-                if (glm::distance(botPosition, existingBot.position) < 50.0f) { // Minimum distance between bots
-                    positionValid = false;
-                    break;
-                }
-            }
-        } while (positionValid);
+    }*/
 
-        bots[i].initialize(botPosition);
-        std::cout << "Initialized bot at position: (" << botPosition.x << ", " << botPosition.y << ", " << botPosition.z << ")" << std::endl;
-    }
+    // Create a single bot
+    MyBot bot;
+    float botXPos = static_cast<float>(rand() % 2000 - 1000); // Random x position between -1000 and 1000
+    float botZPos = static_cast<float>(rand() % 2000 - 1000); // Random z position between -1000 and 1000
+    bot.initialize(glm::vec3(botXPos, 0.0f, botZPos));
 
 // Camera setup
     eye_center.y = viewDistance * cos(viewPolar);
@@ -1330,9 +1694,13 @@ int main(void) {
     float fTime = 0.0f; // Time for measuring fps
     unsigned long frames = 0;
 
+
 // Main loop
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // Disable face culling
+        glDisable(GL_CULL_FACE);
 
         // Enable depth testing
         glEnable(GL_DEPTH_TEST);
@@ -1345,9 +1713,9 @@ int main(void) {
 
         if (playAnimation) {
             time += deltaTime * playbackSpeed;
-            for (auto &bot : bots) {
+
                 bot.update(time);
-            }
+
         }
 
         // Rendering
@@ -1361,11 +1729,28 @@ int main(void) {
         for (auto &building : buildings) {
             building.render(vp);
         }
-        // Render the bots
-        for (auto& bot : bots) {
-            bot.render(vp);
-            std::cout << "Rendering bot at position: (" << bot.position.x << ", " << bot.position.y << ", " << bot.position.z << ")" << std::endl;
+        // Render the buildings
+       /* for (auto &tree: trees) {
+            tree.render(vp);
+        }*/
+
+        for (auto &rocket: rockets) {
+            rocket.render(vp);
         }
+
+
+        /*// Render the bots
+        int i = 0;
+        for (auto& bot : bots) {
+            i++;
+            std::cout << "Rendering bot number: (" << i << std::endl;
+            bot.render(vp);
+
+            std::cout << "Rendering bot at position: (" << bot.position.x << ", " << bot.position.y << ", " << bot.position.z << ")" << std::endl;
+        }*/
+
+        // Render the single bot
+        bot.render(vp);
 
         // FPS tracking
         frames++;
@@ -1388,9 +1773,9 @@ int main(void) {
 
 // Clean up
     sky.cleanup();
-    for (auto &bot : bots) {
+
         bot.cleanup();
-    }
+
 // Close OpenGL window and terminate GLFW
     glfwTerminate();
     return 0;

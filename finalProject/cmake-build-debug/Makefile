@@ -212,6 +212,39 @@ external\glad-3.3\src\gl.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_main.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_main.dir\external\glad-3.3\src\gl.c.s
 .PHONY : external\glad-3.3\src\gl.c.s
 
+external\glew-2.1.0\src\glew.obj: external\glew-2.1.0\src\glew.c.obj
+
+.PHONY : external\glew-2.1.0\src\glew.obj
+
+# target to build an object file
+external\glew-2.1.0\src\glew.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_building.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_building.dir\external\glew-2.1.0\src\glew.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_skybox.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_main.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_main.dir\external\glew-2.1.0\src\glew.c.obj
+.PHONY : external\glew-2.1.0\src\glew.c.obj
+
+external\glew-2.1.0\src\glew.i: external\glew-2.1.0\src\glew.c.i
+
+.PHONY : external\glew-2.1.0\src\glew.i
+
+# target to preprocess a source file
+external\glew-2.1.0\src\glew.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_building.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_building.dir\external\glew-2.1.0\src\glew.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_skybox.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_main.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_main.dir\external\glew-2.1.0\src\glew.c.i
+.PHONY : external\glew-2.1.0\src\glew.c.i
+
+external\glew-2.1.0\src\glew.s: external\glew-2.1.0\src\glew.c.s
+
+.PHONY : external\glew-2.1.0\src\glew.s
+
+# target to generate assembly for a file
+external\glew-2.1.0\src\glew.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_building.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_building.dir\external\glew-2.1.0\src\glew.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_skybox.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_skybox.dir\external\glew-2.1.0\src\glew.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\fp_main.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\fp_main.dir\external\glew-2.1.0\src\glew.c.s
+.PHONY : external\glew-2.1.0\src\glew.c.s
+
 finalProject\fp_building.obj: finalProject\fp_building.cpp.obj
 
 .PHONY : finalProject\fp_building.obj
@@ -342,6 +375,9 @@ help:
 	@echo ... external/glad-3.3/src/gl.obj
 	@echo ... external/glad-3.3/src/gl.i
 	@echo ... external/glad-3.3/src/gl.s
+	@echo ... external/glew-2.1.0/src/glew.obj
+	@echo ... external/glew-2.1.0/src/glew.i
+	@echo ... external/glew-2.1.0/src/glew.s
 	@echo ... finalProject/fp_building.obj
 	@echo ... finalProject/fp_building.i
 	@echo ... finalProject/fp_building.s

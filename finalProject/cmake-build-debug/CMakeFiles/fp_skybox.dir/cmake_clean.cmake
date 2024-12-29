@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/fp_skybox.dir/external/glad-3.3/src/gl.c.obj"
+  "CMakeFiles/fp_skybox.dir/external/glew-2.1.0/src/glew.c.obj"
   "CMakeFiles/fp_skybox.dir/finalProject/fp_skybox.cpp.obj"
   "CMakeFiles/fp_skybox.dir/finalProject/render/shader.cpp.obj"
   "fp_skybox.exe"

@@ -7,11 +7,11 @@ C_FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
 
 C_DEFINES = 
 
-C_INCLUDES = -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glfw-3.1.2\include -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glm-0.9.7.1 -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glad-3.3\include -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\finalProject 
+C_INCLUDES = -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glfw-3.1.2\include -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glm-0.9.7.1 -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glad-3.3\include -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glew-2.1.0\include -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\finalProject 
 
 CXX_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1  
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glfw-3.1.2\include -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glm-0.9.7.1 -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glad-3.3\include -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\finalProject 
+CXX_INCLUDES = -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glfw-3.1.2\include -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glm-0.9.7.1 -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glad-3.3\include -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external\glew-2.1.0\include -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\external -IC:\Computer_Graphics_Git\Computer_Graphics\finalProject\finalProject 
 
