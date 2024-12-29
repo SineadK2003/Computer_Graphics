@@ -2,6 +2,7 @@
 
 in vec3 color;
 
+
 // Receive UV input to this fragment shader
 in vec2 uv;
 

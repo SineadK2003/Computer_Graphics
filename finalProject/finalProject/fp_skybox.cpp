@@ -34,15 +34,20 @@ static GLFWwindow *window;
 static int windowWidth = 1024;
 static int windowHeight = 768;
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
-
-
+static void cursor_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 // Camera setup
 glm::vec3 eye_center(0.0f, 0.0f, 0.0f); // Set the camera position higher and further away
 glm::vec3 lookat(0.0f, 0.0f, -1.0f); // Look at the center of the scene
 glm::vec3 up(0.0f, 1.0f, 0.0f); // Up vector
-static float FoV = 45.0f;
-static float zNear = 0.1f;
-static float zFar = 10000.0f;
+
+glm::mat4 viewMatrix, projectionMatrix;
+float FoV = 45.0f;
+float zNear = 10.0f;
+float zFar = 10000.0f;
+//static float FoV = 45.0f;
+//static float zNear = 0.1f;
+//static float zFar = 10000.0f;
 
 // Lighting control
 const glm::vec3 wave500(0.0f, 255.0f, 146.0f);
@@ -54,7 +59,7 @@ static glm::vec3 lightPosition(-275.0f, 500.0f, -275.0f);
 // View control
 static float viewAzimuth = 0.f;
 static float viewPolar = 0.f;
-static float viewDistance = 200.0f;
+static float viewDistance = 500.0f;
 
 // Shadow mapping
 static glm::vec3 lightUp(0.0f, -1.0f, 0.0f); //Light facing down
@@ -286,7 +291,7 @@ struct Skybox {
         textureSamplerID = glGetUniformLocation(programID, "textureSampler");
     }
 
-   void render(glm::mat4 cameraMatrix) {
+    void render(glm::mat4 cameraMatrix) {
         glUseProgram(programID);
 
         glBindVertexArray(vertexArrayID);
@@ -610,6 +615,315 @@ struct Building {
     }
 };
 
+struct Building1 {
+    glm::vec3 position;		// Position of the box
+    glm::vec3 scale;		// Size of the box in each axis
+
+    GLfloat vertex_buffer_data[72] = {	// Vertex definition for a canonical box
+            // Front face
+            -1.0f, -1.0f, 1.0f,
+            1.0f, -1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            -1.0f, 1.0f, 1.0f,
+
+            // Back face
+            1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f, -1.0f,
+            -1.0f, 1.0f, -1.0f,
+            1.0f, 1.0f, -1.0f,
+
+            // Left face
+            -1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f, 1.0f,
+            -1.0f, 1.0f, 1.0f,
+            -1.0f, 1.0f, -1.0f,
+
+            // Right face
+            1.0f, -1.0f, 1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, 1.0f, -1.0f,
+            1.0f, 1.0f, 1.0f,
+
+            // Top face
+            -1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, -1.0f,
+            -1.0f, 1.0f, -1.0f,
+
+            // Bottom face
+            -1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, 1.0f,
+            -1.0f, -1.0f, 1.0f,
+    };
+
+    GLfloat normal_buffer_data[72] = {
+            // Front face
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+
+            // Back face
+            0.0f, 0.0f, -1.0f,
+            0.0f, 0.0f, -1.0f,
+            0.0f, 0.0f, -1.0f,
+            0.0f, 0.0f, -1.0f,
+
+            // Left face
+            -1.0f, 0.0f, 0.0f,
+            -1.0f, 0.0f, 0.0f,
+            -1.0f, 0.0f, 0.0f,
+            -1.0f, 0.0f, 0.0f,
+
+            // Right face
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+
+            // Top face
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+
+            // Bottom face
+            0.0f, -1.0f, 0.0f,
+            0.0f, -1.0f, 0.0f,
+            0.0f, -1.0f, 0.0f,
+            0.0f, -1.0f, 0.0f
+    };
+
+    GLfloat color_buffer_data[72] = {
+            // Front, red
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+            1.0f, 0.0f, 0.0f,
+
+            // Back, yellow
+            1.0f, 1.0f, 0.0f,
+            1.0f, 1.0f, 0.0f,
+            1.0f, 1.0f, 0.0f,
+            1.0f, 1.0f, 0.0f,
+
+            // Left, green
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+
+            // Right, cyan
+            0.0f, 1.0f, 1.0f,
+            0.0f, 1.0f, 1.0f,
+            0.0f, 1.0f, 1.0f,
+            0.0f, 1.0f, 1.0f,
+
+            // Top, blue
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+
+            // Bottom, magenta
+            1.0f, 0.0f, 1.0f,
+            1.0f, 0.0f, 1.0f,
+            1.0f, 0.0f, 1.0f,
+            1.0f, 0.0f, 1.0f,
+    };
+
+    GLuint index_buffer_data[36] = {		// 12 triangle faces of a box
+            0, 1, 2,
+            0, 2, 3,
+
+            4, 5, 6,
+            4, 6, 7,
+
+            8, 9, 10,
+            8, 10, 11,
+
+            12, 13, 14,
+            12, 14, 15,
+
+            16, 17, 18,
+            16, 18, 19,
+
+            20, 21, 22,
+            20, 22, 23,
+    };
+
+    GLfloat uv_buffer_data[48] = {
+            // Front
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 0.0f,
+            // Back
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 0.0f,
+            // Left
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 0.0f,
+            // Right
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 0.0f,
+            // Top - we do not want texture the top
+            0.0f, 0.0f,
+            0.0f, 0.0f,
+            0.0f, 0.0f,
+            0.0f, 0.0f,
+            // Bottom - we do not want texture the bottom
+            0.0f, 0.0f,
+            0.0f, 0.0f,
+            0.0f, 0.0f,
+            0.0f, 0.0f,
+    };
+
+    // OpenGL buffers
+    GLuint vertexArrayID;
+    GLuint vertexBufferID;
+    GLuint indexBufferID;
+    GLuint colorBufferID;
+    GLuint uvBufferID;
+    GLuint textureID;
+    GLuint normalBufferID;
+
+    // Shader variable IDs
+    GLuint modelMatrixID;
+    GLuint mvpMatrixID;
+    GLuint textureSamplerID;
+    GLuint lightMatrixID;
+    GLuint lightPositionID;
+    GLuint lightIntensityID;
+    GLuint exposureID;
+    GLuint programID;
+    GLuint depthMap1ID;
+
+    void initialize(glm::vec3 position, glm::vec3 scale, const char* texturePath) {
+        // Define scale of the building geometry
+        this->position = position;
+        this->scale = scale;
+
+        // Create a vertex array object
+        glGenVertexArrays(1, &vertexArrayID);
+        glBindVertexArray(vertexArrayID);
+
+        // Create a vertex buffer object to store the vertex data
+        glGenBuffers(1, &vertexBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+        // Create a vertex buffer object to store the color data
+        glGenBuffers(1, &colorBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, colorBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(color_buffer_data), color_buffer_data, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(3);
+        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+        // Scale up the v-coordinate for texture tiling along the height
+        for (int i = 0; i < 24; ++i) {
+            uv_buffer_data[2 * i + 1] *= 5;
+        }
+
+        glGenBuffers(1, &uvBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(uv_buffer_data), uv_buffer_data,GL_STATIC_DRAW);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
+        glGenBuffers(1, &normalBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, normalBufferID);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(normal_buffer_data), normal_buffer_data, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+        // Create an index buffer object to store the index data that defines triangle faces
+        glGenBuffers(1, &indexBufferID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_buffer_data), index_buffer_data, GL_STATIC_DRAW);
+
+        // Create and compile our GLSL program from the shaders
+        programID = LoadShadersFromFile("../lab4/shader/buildLight.vert", "../lab4/shader/buildLight.frag");
+        if (programID == 0)
+        {
+            std::cerr << "Failed to load shaders." << std::endl;
+        }
+
+        // Get a handle for our "MVP" uniform
+        modelMatrixID = glGetUniformLocation(programID, "modelMatrix");
+        mvpMatrixID = glGetUniformLocation(programID, "MVP");
+        textureID = LoadTextureTileBox(texturePath);
+        textureSamplerID = glGetUniformLocation(programID,"textureSampler");
+        lightMatrixID = glGetUniformLocation(programID, "LightMVP");
+        lightPositionID = glGetUniformLocation(programID, "lightPosition");
+        lightIntensityID = glGetUniformLocation(programID, "lightIntensity");
+        exposureID = glGetUniformLocation(programID, "exposure");
+        depthMap1ID = glGetUniformLocation(programID, "depthMap");
+    }
+
+
+    void render(glm::mat4 cameraMatrix,float exposureVal, glm::mat4 lightPositionMatrix, glm::vec3 lightPosition, glm::vec3 lightIntensity) {
+        glUseProgram(programID);
+        glBindVertexArray(vertexArrayID);
+
+        glm::mat4 modelMatrix = glm::mat4(1.0f);
+        modelMatrix = glm::translate(modelMatrix, position);
+        modelMatrix = glm::scale(modelMatrix, scale);
+
+        glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
+
+        // Set model-view-projection matrix
+        glm::mat4 mvp = cameraMatrix * modelMatrix;
+        glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
+
+        glm::mat4 mvp1 = lightPositionMatrix;
+        glUniformMatrix4fv(lightMatrixID, 1, GL_FALSE, &mvp1[0][0]);
+
+        glUniform1f(exposureID, exposureVal);
+
+        // Set light data
+        glUniform3fv(lightPositionID, 1, &lightPosition[0]);
+        glUniform3fv(lightIntensityID, 1, &lightIntensity[0]);
+
+        // Set textureSampler to use texture unit 0
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        glUniform1i(textureSamplerID, 0);
+
+        // Draw the box
+        glDrawElements(
+                GL_TRIANGLES,      // mode
+                36,    			   // number of indices
+                GL_UNSIGNED_INT,   // type
+                (void*)0           // element array buffer offset
+        );
+
+        glBindVertexArray(0);
+        glUseProgram(0);
+    }
+
+    void cleanup() {
+        glDeleteBuffers(1, &vertexBufferID);
+        glDeleteBuffers(1, &colorBufferID);
+        glDeleteBuffers(1, &indexBufferID);
+        glDeleteVertexArrays(1, &vertexArrayID);
+        glDeleteBuffers(1, &uvBufferID);
+        glDeleteTextures(1, &textureID);
+        glDeleteBuffers(1, &normalBufferID);
+        glDeleteProgram(programID);
+    }
+};
+
+
 struct Rocket {
     glm::vec3 position;		// Position of the box
     glm::vec3 scale;		// Size of the box in each axis
@@ -795,7 +1109,7 @@ struct Rocket {
         glBufferData(GL_ARRAY_BUFFER, sizeof(color_buffer_data), color_buffer_data, GL_STATIC_DRAW);
 
         // Create a vertex buffer object to store the UV data
-       // for (int i = 0; i < 24; ++i) uv_buffer_data[2*i+1] *= 5;
+        // for (int i = 0; i < 24; ++i) uv_buffer_data[2*i+1] *= 5;
         glGenBuffers(1, &uvBufferID);
         glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
         glBufferData(GL_ARRAY_BUFFER, sizeof(uv_buffer_data), uv_buffer_data,
@@ -1234,7 +1548,7 @@ struct MyBot {
         }
 
         // Apply scaling transformation
-        glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)); // Adjust the scale factor as needed
+        glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f)); // Adjust the scale factor as needed
         for (auto& node : model.nodes) {
             if (node.matrix.size() == 16) {
                 glm::mat4 nodeMatrix = glm::make_mat4(node.matrix.data());
@@ -1517,7 +1831,14 @@ int main(void) {
 
     // Ensure we can capture the escape key being pressed below
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
+    // Set the key callback
     glfwSetKeyCallback(window, key_callback);
+    // Set input callbacks
+   glfwSetCursorPosCallback(window, cursor_callback);
+    glfwSetScrollCallback(window, scroll_callback);
+
+
 
     // Load OpenGL functions, gladLoadGL returns the loaded version, 0 on error.
     int version = gladLoadGL(glfwGetProcAddress);
@@ -1584,15 +1905,15 @@ int main(void) {
     }
 
 
-    /*std::vector<GLuint> treeTextures;
+   /* std::vector<GLuint> treeTextures;
     treeTextures.push_back(LoadTextureTileBox(
-            "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\tree.jpeg"));
+            "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\buildings\\tree3.png"));
 
-    std::vector<Building> trees;
+    std::vector<Rocket> trees;
     int numTrees = 20; // Adjust this number to add more buildings
 
     for (int i = 0; i < numTrees; ++i) {
-        trees.push_back(Building());
+        trees.push_back(Rocket());
     }
 
     for (int i = 0; i < numTrees; ++i) {
@@ -1642,12 +1963,12 @@ int main(void) {
         do {
             position_r.x = static_cast<float>(rand() % 2000 - 1000); // Random x position between -1000 and 1000
             position_r.z = static_cast<float>(rand() % 2000 - 1000); // Random z position between -1000 and 1000
-            position_r.y = static_cast<float>(rand() % 700 + 300);   // Random y position between 100 and 600 (sky level)
+            position_r.y = static_cast<float>(rand() % 1000 + 700);   // Random y position between 100 and 600 (sky level)
         } while (isPositionInBuilding(position_r, size_t, buildings, buffer));
 
         rockets[i].initialize(position_r, size_t);
         rockets[i].setTexture(rocketTextures[i % rocketTextures.size()]);
-}
+    }
 
 
     /*// Seed the random number generator
@@ -1682,10 +2003,6 @@ int main(void) {
     eye_center.x = viewDistance * cos(viewAzimuth);
     eye_center.z = viewDistance * sin(viewAzimuth);
 
-    glm::mat4 viewMatrix, projectionMatrix;
-    float FoV = 45.0f;
-    float zNear = 10.0f;
-    float zFar = 10000.0f;
     projectionMatrix = glm::perspective(glm::radians(FoV), 1024.0f / 768.0f, zNear, zFar);
 
 // Time and frame rate tracking
@@ -1713,9 +2030,7 @@ int main(void) {
 
         if (playAnimation) {
             time += deltaTime * playbackSpeed;
-
-                bot.update(time);
-
+            bot.update(time);
         }
 
         // Rendering
@@ -1729,15 +2044,15 @@ int main(void) {
         for (auto &building : buildings) {
             building.render(vp);
         }
-        // Render the buildings
-       /* for (auto &tree: trees) {
-            tree.render(vp);
-        }*/
+
+        /*// Render the buildings
+         for (auto &tree: trees) {
+             tree.render(vp);
+         }*/
 
         for (auto &rocket: rockets) {
             rocket.render(vp);
         }
-
 
         /*// Render the bots
         int i = 0;
@@ -1774,14 +2089,12 @@ int main(void) {
 // Clean up
     sky.cleanup();
 
-        bot.cleanup();
+    bot.cleanup();
 
 // Close OpenGL window and terminate GLFW
     glfwTerminate();
     return 0;
 }
-
-
 
 void updateCameraPosition()
 {
@@ -1790,6 +2103,10 @@ void updateCameraPosition()
     eye_center.z = viewDistance * cos(viewPolar) * sin(viewAzimuth);
 }
 
+void update_view_matrix() {
+
+    viewMatrix = glm::lookAt(eye_center, eye_center + glm::vec3(0.0f, 0.0f, -1.0f), up);
+    }
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode) {
     float moveSpeed = 10.0f; // Increase this value to speed up the camera movement
     float verticalBoundary = 1500.0f; // Define the vertical boundary for the camera
@@ -1827,7 +2144,9 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
         viewAzimuth += 0.1f;
         eye_center.x = viewDistance * cos(viewAzimuth);
-        eye_center.z = viewDistance * sin(viewAzimuth);
+       eye_center.z = viewDistance * sin(viewAzimuth);
+        //eye_center.x += 0.95f; // Move the camera to the right
+        //update_view_matrix();
     }
 
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
@@ -1835,11 +2154,9 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     }
 }
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+void cursor_callback(GLFWwindow* window, double xpos, double ypos) {
     static float lastX = 1024.0f / 2.0;
     static float lastY = 768.0f / 2.0;
-    static float yaw = -90.0f;
-    static float pitch = 0.0f;
     static bool firstMouse = true;
 
     if (firstMouse) {
@@ -1853,21 +2170,27 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
     lastX = xpos;
     lastY = ypos;
 
-    float sensitivity = 0.1f;
+    float sensitivity = 0.05f;
     xoffset *= sensitivity;
     yoffset *= sensitivity;
 
-    yaw += xoffset;
-    pitch += yoffset;
+    // Update the camera's position
+    eye_center.x -= xoffset;
+    eye_center.y -= yoffset;
 
-    if (pitch > 89.0f)
-        pitch = 89.0f;
-    if (pitch < -89.0f)
-        pitch = -89.0f;
+    // Update the view matrix
+    update_view_matrix();
+}
 
-    glm::vec3 front;
-    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    front.y = sin(glm::radians(pitch));
-    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    lookat = glm::normalize(front);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+    if (yoffset < 0) { // Scroll down
+        eye_center.x += 0.95f; // Move the camera to the right
+    } else if (yoffset > 0) { // Scroll up
+        eye_center.x -= 0.95f; // Move the camera to the left (optional)
+    } /*else if (xoffset > 0) { // Scroll sideways
+        eye_center.y += 0.95f; // Move the camera to the left (optional)
+    } else if (xoffset < 0) { // Scroll sideways
+        eye_center.x - 0.95f; // Move the camera to the left (optional)
+    }*/
+    update_view_matrix();
 }
