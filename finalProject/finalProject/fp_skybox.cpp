@@ -1407,7 +1407,7 @@ void updateCameraPosition()
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode) {
     float moveSpeed = 10.0f; // Increase this value to speed up the camera movement
-    float verticalBoundary = 2000.0f; // Define the vertical boundary for the camera
+    float verticalBoundary = 1500.0f; // Define the vertical boundary for the camera
 
     if (key == GLFW_KEY_R && action == GLFW_PRESS) {
         viewAzimuth = 0.f;
