@@ -34,29 +34,27 @@ static int windowWidth = 1024;
 static int windowHeight = 768;
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
 
-// OpenGL camera view parameters
-
-//static glm::vec3 lookat(0.0f, 0.0f, 0.0f);
-glm::vec3 eye_center(0.0f, 0.0f, 0.0f); // Fixed camera position
-//glm::vec3 up(0.0f, 1.0f, 0.0f); // Up vector
 
 // Camera setup
-//glm::vec3 eye_center(0.0f, 1000.0f, 2000.0f); // Set the camera position higher and further away
-glm::vec3 lookat(0.0f, 0.0f, 0.0f); // Look at the center of the scene
+glm::vec3 eye_center(0.0f, 0.0f, 0.0f); // Set the camera position higher and further away
+glm::vec3 lookat(0.0f, 0.0f, -1.0f); // Look at the center of the scene
 glm::vec3 up(0.0f, 1.0f, 0.0f); // Up vector
 static float FoV = 45.0f;
 static float zNear = 600.0f;
 static float zFar = 1500.0f;
 
+// Camera parameters
+
+
 // View control
 static float viewAzimuth = 0.f;
 static float viewPolar = 0.f;
-static float viewDistance = 300.0f;
+static float viewDistance = 200.0f;
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 static void cursor_callback(GLFWwindow* window, double xpos, double ypos);
 
-// TODO: set these parameters
+
 static float depthFoV = 90.0f;
 static float depthNear = 90.0f;
 static float depthFar = 1000.0f;
@@ -139,43 +137,6 @@ struct Skybox {
             -1.0f, -1.0f, 1.0f,
     };
 
-    GLfloat color_buffer_data[72] = {
-            // Front, red
-            1.0f, 0.0f, 0.0f,
-            1.0f, 0.0f, 0.0f,
-            1.0f, 0.0f, 0.0f,
-            1.0f, 0.0f, 0.0f,
-
-            // Back, yellow
-            1.0f, 1.0f, 0.0f,
-            1.0f, 1.0f, 0.0f,
-            1.0f, 1.0f, 0.0f,
-            1.0f, 1.0f, 0.0f,
-
-            // Left, green
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-
-            // Right, cyan
-            0.0f, 1.0f, 1.0f,
-            0.0f, 1.0f, 1.0f,
-            0.0f, 1.0f, 1.0f,
-            0.0f, 1.0f, 1.0f,
-
-            // Top, blue
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-
-            // Bottom, magenta
-            1.0f, 0.0f, 1.0f,
-            1.0f, 0.0f, 1.0f,
-            1.0f, 0.0f, 1.0f,
-            1.0f, 0.0f, 1.0f,
-    };
 
     GLuint index_buffer_data[36] = {		// 12 triangle faces of a box
             0, 2, 1,
@@ -286,14 +247,10 @@ struct Skybox {
         // Get a handle for our "MVP" uniform
         mvpMatrixID = glGetUniformLocation(programID, "MVP");
 
-        // TODO: Load a texture
-        // --------------------
-        // --------------------
+        //  Load a texture
         textureID = LoadTextureTileBox(texturePath);
 
-        // TODO: Get a handle to texture sampler
-        // -------------------------------------
-        // -------------------------------------
+        // Get a handle to texture sampler
         textureSamplerID = glGetUniformLocation(programID, "textureSampler");
     }
 
@@ -346,64 +303,6 @@ struct Skybox {
         glDisableVertexAttribArray(1);
         glDisableVertexAttribArray(2);
     }
-
-   /*void render(glm::mat4 viewMatrix, glm::mat4 projectionMatrix) {
-       glUseProgram(programID);
-
-       glBindVertexArray(vertexArrayID);
-
-       glEnableVertexAttribArray(0);
-       glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
-       glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-       glEnableVertexAttribArray(1);
-       glBindBuffer(GL_ARRAY_BUFFER, colorBufferID);
-       glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
-
-       // Position the skybox at the camera's position
-       glm::mat4 modelMatrix = glm::mat4(1.0f);
-       modelMatrix = glm::translate(modelMatrix, eye_center);
-
-       // Scale the skybox
-       modelMatrix = glm::scale(modelMatrix, glm::vec3(5000.0f)); // Adjust the scale as needed
-
-       // Remove translation from the view matrix
-       glm::mat4 viewMatrixNoTranslation = glm::mat4(glm::mat3(viewMatrix));
-
-       // Set model-view-projection matrix
-       glm::mat4 mvp = projectionMatrix * viewMatrixNoTranslation * modelMatrix;
-       glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
-
-       // Enable UV buffer and texture sampler
-       glEnableVertexAttribArray(2);
-       glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
-       glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-       // Set textureSampler to use texture unit 0
-       glActiveTexture(GL_TEXTURE0);
-       glBindTexture(GL_TEXTURE_2D, textureID);
-       glUniform1i(textureSamplerID, 0);
-
-       // Disable depth testing
-       glDisable(GL_DEPTH_TEST);
-
-       // Draw the skybox
-       glDrawElements(
-               GL_TRIANGLES,      // mode
-               36,    			   // number of indices
-               GL_UNSIGNED_INT,   // type
-               (void*)0           // element array buffer offset
-       );
-
-       // Re-enable depth testing
-       glEnable(GL_DEPTH_TEST);
-
-       glDisableVertexAttribArray(0);
-       glDisableVertexAttribArray(1);
-       glDisableVertexAttribArray(2);
-   }*/
 
     void cleanup() {
         glDeleteBuffers(1, &vertexBufferID);
@@ -519,10 +418,6 @@ struct Building {
             20, 22, 23,
     };
 
-    // TODO: Define UV buffer data
-    // ---------------------------
-    // ---------------------------
-
     GLfloat uv_buffer_data[48] = {
             // Front
             0.0f, 1.0f,
@@ -597,12 +492,11 @@ struct Building {
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
 
         // Create a vertex buffer object to store the color data
-        // TODO:
         glGenBuffers(1, &colorBufferID);
         glBindBuffer(GL_ARRAY_BUFFER, colorBufferID);
         glBufferData(GL_ARRAY_BUFFER, sizeof(color_buffer_data), color_buffer_data, GL_STATIC_DRAW);
 
-        // TODO: Create a vertex buffer object to store the UV data
+        // Create a vertex buffer object to store the UV data
         for (int i = 0; i < 24; ++i) uv_buffer_data[2*i+1] *= 5;
         glGenBuffers(1, &uvBufferID);
         glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
@@ -926,7 +820,6 @@ struct MyBot {
     }
 
 
-
     void updateAnimation(
             const tinygltf::Model &model,
             const tinygltf::Animation &anim,
@@ -1035,68 +928,6 @@ struct MyBot {
 
         return res;
     }
-    /*void initialize(const glm::vec3& pos) {
-        position = pos;
-        if (!loadModel(model, "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\model\\bot\\bot.gltf")) {
-            return;
-        }
-        // Apply scaling transformation
-        glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f)); // Scale down by 50%
-        for (auto& node : model.nodes) {
-            if (node.matrix.size() == 16) {
-                glm::mat4 nodeMatrix = glm::make_mat4(node.matrix.data());
-                nodeMatrix = scaleMatrix * nodeMatrix;
-                std::copy(glm::value_ptr(nodeMatrix), glm::value_ptr(nodeMatrix) + 16, node.matrix.begin());
-            }
-        }
-
-        // Prepare buffers for rendering
-        primitiveObjects = bindModel(model);
-
-        // Prepare joint matrices
-        skinObjects = prepareSkinning(model);
-
-        // Prepare animation data
-        animationObjects = prepareAnimation(model);
-
-        // Create and compile our GLSL program from the shaders
-        programID = LoadShadersFromFile("C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\shader\\bot.vert", "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\shader\\bot.frag");
-        if (programID == 0)
-        {
-            std::cerr << "Failed to load shaders." << std::endl;
-        }
-
-        nodeStates.resize(model.nodes.size());
-        for (size_t i = 0; i < model.nodes.size(); ++i) {
-            const tinygltf::Node &node = model.nodes[i];
-
-            NodeState &state = nodeStates[i];
-            // Translation
-            if (node.translation.size() == 3) {
-                state.translation = glm::vec3(node.translation[0], node.translation[1], node.translation[2]);
-            } else {
-                state.translation = glm::vec3(0.0f);
-            }
-            // Rotation
-            if (node.rotation.size() == 4) {
-                state.rotation = glm::quat(node.rotation[3], node.rotation[0], node.rotation[1], node.rotation[2]);
-            } else {
-                state.rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-            }
-            // Scale
-            if (node.scale.size() == 3) {
-                state.scale = glm::vec3(node.scale[0], node.scale[1], node.scale[2]);
-            } else {
-                state.scale = glm::vec3(1.0f);
-            }
-        }
-
-        // Get a handle for GLSL variables
-        mvpMatrixID = glGetUniformLocation(programID, "MVP");
-        lightPositionID = glGetUniformLocation(programID, "lightPosition");
-        lightIntensityID = glGetUniformLocation(programID, "lightIntensity");
-        jointMatricesID = glGetUniformLocation(programID, "jointMatrices");
-    }*/
 
     void initialize(const glm::vec3& pos) {
         position = pos;
@@ -1105,7 +936,7 @@ struct MyBot {
         }
 
         // Apply scaling transformation
-        glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f)); // Adjust the scale factor as needed
+        glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)); // Adjust the scale factor as needed
         for (auto& node : model.nodes) {
             if (node.matrix.size() == 16) {
                 glm::mat4 nodeMatrix = glm::make_mat4(node.matrix.data());
@@ -1341,7 +1172,6 @@ struct MyBot {
                                glm::value_ptr(skinObject.jointMatrices[0]));
         }
 
-
         // Draw the GLTF model
         drawModel(primitiveObjects, model);
     }
@@ -1405,8 +1235,6 @@ int main(void) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
 
-    // TODO: Create more buildings
-    // ---------------------------
     Skybox sky;
     sky.initialize(glm::vec3(eye_center.x, eye_center.y - 5000, eye_center.z), glm::vec3(5000, 5000, 5000),
                    "C:\\Computer_Graphics_Git\\Computer_Graphics\\finalProject\\finalProject\\background\\planet8.jpeg");
@@ -1450,10 +1278,12 @@ int main(void) {
     // Create multiple bots
     std::vector<MyBot> bots;
     int numBots = 10; // Adjust this number to add more bots
-    float minDistance = 50.0f; // Minimum distance between bots
 
     for (int i = 0; i < numBots; ++i) {
-        MyBot bot;
+        bots.push_back(MyBot());
+    }
+
+    for (int i = 0; i < numBots; ++i) {
         glm::vec3 botPosition;
         bool positionValid;
 
@@ -1471,16 +1301,16 @@ int main(void) {
             }
 
             // Check distance from other bots
-            for (const auto &existingBot : bots) {
-                if (glm::distance(botPosition, existingBot.position) < minDistance) {
+            for (const auto& existingBot : bots) {
+                if (glm::distance(botPosition, existingBot.position) < 50.0f) { // Minimum distance between bots
                     positionValid = false;
                     break;
                 }
             }
-        } while (!positionValid);
+        } while (positionValid);
 
-        bot.initialize(botPosition);
-        bots.push_back(bot);
+        bots[i].initialize(botPosition);
+        std::cout << "Initialized bot at position: (" << botPosition.x << ", " << botPosition.y << ", " << botPosition.z << ")" << std::endl;
     }
 
 // Camera setup
@@ -1503,6 +1333,10 @@ int main(void) {
 // Main loop
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // Enable depth testing
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LESS);
 
         // Update states for animation
         double currentTime = glfwGetTime();
@@ -1527,10 +1361,10 @@ int main(void) {
         for (auto &building : buildings) {
             building.render(vp);
         }
-
         // Render the bots
-        for (auto &bot : bots) {
+        for (auto& bot : bots) {
             bot.render(vp);
+            std::cout << "Rendering bot at position: (" << bot.position.x << ", " << bot.position.y << ", " << bot.position.z << ")" << std::endl;
         }
 
         // FPS tracking
@@ -1563,80 +1397,7 @@ int main(void) {
 }
 
 
-// Is called whenever a key is pressed/released via GLFW
-/*void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
-{
-    if (key == GLFW_KEY_R && action == GLFW_PRESS)
-    {
-        viewAzimuth = 0.f;
-        viewPolar = 0.f;
-        eye_center.y = viewDistance * cos(viewPolar);
-        eye_center.x = viewDistance * cos(viewAzimuth);
-        eye_center.z = viewDistance * sin(viewAzimuth);
-        std::cout << "Reset." << std::endl;
-    }
 
-    if (key == GLFW_KEY_UP && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        viewPolar -= 0.1f;
-        eye_center.y = viewDistance * cos(viewPolar);
-    }
-
-    if (key == GLFW_KEY_DOWN && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        viewPolar += 0.1f;
-        eye_center.y = viewDistance * cos(viewPolar);
-    }
-
-    if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        viewAzimuth -= 0.1f;
-        eye_center.x = viewDistance * cos(viewAzimuth);
-        eye_center.z = viewDistance * sin(viewAzimuth);
-    }
-
-    if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        viewAzimuth += 0.1f;
-        eye_center.x = viewDistance * cos(viewAzimuth);
-        eye_center.z = viewDistance * sin(viewAzimuth);
-    }
-
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GL_TRUE);
-}*/
-
-/*void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
-{
-    if (key == GLFW_KEY_R && action == GLFW_PRESS)
-    {
-        lookat = glm::vec3(0.0f, 0.0f, 0.0f);
-        std::cout << "Reset." << std::endl;
-    }
-
-    if (key == GLFW_KEY_UP && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        lookat.y += 1.0f;
-    }
-
-    if (key == GLFW_KEY_DOWN && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        lookat.y -= 1.0f;
-    }
-
-    if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        lookat.x -= 1.0f;
-    }
-
-    if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        lookat.x += 1.0f;
-    }
-
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GL_TRUE);
-}*/
 void updateCameraPosition()
 {
     eye_center.y = viewDistance * sin(viewPolar);
@@ -1644,56 +1405,11 @@ void updateCameraPosition()
     eye_center.z = viewDistance * cos(viewPolar) * sin(viewAzimuth);
 }
 
-/*void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
-{
-    if (key == GLFW_KEY_R && action == GLFW_PRESS)
-    {
-        viewAzimuth = glm::radians(45.0f);
-        viewPolar = glm::radians(30.0f);
-        updateCameraPosition();
-        std::cout << "Reset." << std::endl;
-    }
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode) {
+    float moveSpeed = 10.0f; // Increase this value to speed up the camera movement
+    float verticalBoundary = 2000.0f; // Define the vertical boundary for the camera
 
-    if (key == GLFW_KEY_UP && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        viewPolar -= 0.1f;
-        updateCameraPosition();
-    }
-
-    if (key == GLFW_KEY_DOWN && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        viewPolar += 0.1f;
-        updateCameraPosition();
-    }
-
-    if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        viewAzimuth -= 0.1f;
-        updateCameraPosition();
-    }
-
-    if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
-        viewAzimuth += 0.1f;
-        updateCameraPosition();
-    }
-
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GL_TRUE);
-}*/
-
-
-
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
-{
-    /*if (key == GLFW_KEY_R && action == GLFW_PRESS)
-    {
-        lookat = glm::vec3(0.0f, 0.0f, 0.0f);
-        std::cout << "Reset." << std::endl;
-    }*/
-
-    if (key == GLFW_KEY_R && action == GLFW_PRESS)
-    {
+    if (key == GLFW_KEY_R && action == GLFW_PRESS) {
         viewAzimuth = 0.f;
         viewPolar = 0.f;
         eye_center.y = viewDistance * cos(viewPolar);
@@ -1701,42 +1417,72 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         eye_center.z = viewDistance * sin(viewAzimuth);
         std::cout << "Reset." << std::endl;
     }
-    float moveSpeed = 5.0f; // Increase this value to speed up the camera movement
 
-    if (key == GLFW_KEY_UP && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
+    if (key == GLFW_KEY_UP && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
         lookat.y += moveSpeed;
+        if (lookat.y > verticalBoundary) {
+            lookat.y = -verticalBoundary; // Loop back to the bottom
+        }
     }
 
-    if (key == GLFW_KEY_DOWN && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
+
+    if (key == GLFW_KEY_DOWN && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
         lookat.y -= moveSpeed;
+        if (lookat.y < -verticalBoundary) {
+            lookat.y = verticalBoundary; // Loop back to the top
+        }
     }
 
-    /* if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-     {
-         lookat.x -= 1.0f;
-     }
-
-     /*if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-     {
-         lookat.x += 1.0f;
-     }*/
-
-    if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
+    if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
         viewAzimuth -= 0.1f;
         eye_center.x = viewDistance * cos(viewAzimuth);
         eye_center.z = viewDistance * sin(viewAzimuth);
     }
 
-    if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
-    {
+    if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
         viewAzimuth += 0.1f;
         eye_center.x = viewDistance * cos(viewAzimuth);
         eye_center.z = viewDistance * sin(viewAzimuth);
     }
 
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GL_TRUE);
+    }
+}
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+    static float lastX = 1024.0f / 2.0;
+    static float lastY = 768.0f / 2.0;
+    static float yaw = -90.0f;
+    static float pitch = 0.0f;
+    static bool firstMouse = true;
+
+    if (firstMouse) {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    float xoffset = xpos - lastX;
+    float yoffset = lastY - ypos; // Reversed since y-coordinates go from bottom to top
+    lastX = xpos;
+    lastY = ypos;
+
+    float sensitivity = 0.1f;
+    xoffset *= sensitivity;
+    yoffset *= sensitivity;
+
+    yaw += xoffset;
+    pitch += yoffset;
+
+    if (pitch > 89.0f)
+        pitch = 89.0f;
+    if (pitch < -89.0f)
+        pitch = -89.0f;
+
+    glm::vec3 front;
+    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front.y = sin(glm::radians(pitch));
+    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    lookat = glm::normalize(front);
 }
